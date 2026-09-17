@@ -428,8 +428,8 @@ children: [
 ] },
 { id: 'pendidikan', title: 'Pendidikan dan Pengembangan Pegawai', icon: '🎓', cat: 'kepegawaian', desc: 'Studi, diklat, beasiswa, dan pengembangan kompetensi.',
 children: [
-{ id: 'laporan-perkembangan-studi', title: 'Laporan Perkembangan Studi', icon: '📚', cat: 'kepegawaian', desc: 'Pelaporan kemajuan studi pegawai.' },
-{ id: 'info-diklat-beasiswa', title: 'Informasi Diklat dan Beasiswa', icon: 'ℹ️', cat: 'kepegawaian', desc: 'Informasi peluang diklat dan beasiswa.' },
+{ id: 'laporan-perkembangan-studi', title: 'Laporan Perkembangan Studi', icon: '📚', cat: 'kepegawaian', desc: 'Kewajiban pelaporan studi berkala berdasarkan PMK 34/2024.' },
+{ id: 'info-diklat-beasiswa', title: 'Informasi Diklat dan Beasiswa', icon: '️', cat: 'kepegawaian', desc: 'Panduan Tugas Belajar (Dibiayai & Mandiri) sesuai PMK 34/2024.' },
 { id: 'gelar-akademik', title: 'Pencantuman Gelar Akademik', icon: '🏅', cat: 'kepegawaian', desc: 'Prosedur pencantuman gelar akademik.' },
 { id: 'kenaikan-pangkat', title: 'Kenaikan Pangkat dan Grading', icon: '📈', cat: 'kepegawaian', desc: 'Proses kenaikan pangkat dan grading.' },
 { id: 'learning-org', title: 'Learning Organization', icon: '🎯', cat: 'kepegawaian', desc: 'Program organisasi pembelajar.' }
@@ -599,6 +599,8 @@ renderBreadcrumb(item.path);
 if (item.id === 'kinerja') renderKinerjaHub(item);
 else if (item.id.startsWith('mk-')) renderMKSubsection(item);
 else if (item.id === 'tata-naskah') renderTataNaskahDinas(item);
+else if (item.id === 'laporan-perkembangan-studi') renderLaporanPerkembanganStudi(item); 
+else if (item.id === 'info-diklat-beasiswa') renderInfoDiklatBeasiswa(item);      
 else if (item.hasChildren) renderCategoryPage(item);
 else renderArticlePage(item);
 
@@ -853,6 +855,173 @@ function renderTataNaskahDinas(item) {
                         <span style="font-size:.9rem;color:var(--text)">${item}</span>
                     </div>
                 `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+    /* ==========================================================
+   LAPORAN PERKEMBANGAN STUDI (Berdasarkan PMK 34/2024)
+   ========================================================== */
+function renderLaporanPerkembanganStudi(item) {
+    document.getElementById('contentArea').innerHTML = `
+        <div class="article-head">
+            <h2>${item.icon} ${item.title}</h2>
+            <p>${item.desc || ''}</p>
+        </div>
+
+        <div class="mk-section">
+            <h3>📌 Dasar Hukum & Definisi</h3>
+            <div class="info-box blue">
+                <strong>📖 PMK Nomor 34 Tahun 2024</strong>
+                Laporan Perkembangan Studi adalah laporan yang disusun oleh PNS Tugas Belajar mengenai perkembangan studi pada setiap akhir periode pembelajaran melalui aplikasi otomasi perkantoran yang disediakan oleh Kementerian Keuangan.
+            </div>
+            <div class="info-box purple">
+                <strong>⚖️ Pasal 16 ayat (1) huruf f</strong>
+                Menyampaikan Laporan Perkembangan Studi merupakan <strong>kewajiban</strong> PNS Tugas Belajar (Dibiayai maupun Mandiri Diberhentikan) dan digunakan sebagai salah satu dasar penilaian kinerja.
+            </div>
+        </div>
+
+        <div class="mk-section">
+            <h3>📅 Kapan Harus Melapor?</h3>
+            <div class="info-box orange">
+                <strong>⏰ Periode Pelaporan</strong>
+                Dilaporkan pada <strong>setiap akhir periode pembelajaran</strong> (semester/term/periode akademik) selama menjalani Tugas Belajar.
+            </div>
+            <div class="info-box green">
+                <strong>📤 Cara Menyampaikan</strong>
+                Melalui <strong>aplikasi otomasi perkantoran (office automation)</strong> yang disediakan oleh Kementerian Keuangan, ditujukan kepada atasan langsung dan UPK (tembusan UPTB dan UPSDM).
+            </div>
+        </div>
+
+        <div class="mk-section">
+            <h3>📝 Format & Isi Laporan</h3>
+            <p>Berdasarkan Lampiran E & N PMK 34/2024, laporan harus memuat:</p>
+            <div class="data-table-wrap">
+                <table class="data-table">
+                    <thead><tr><th>Komponen</th><th>Keterangan</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Data Pegawai</strong></td><td>Nama, NIP, Pangkat/Gol, Jabatan, Unit Organisasi</td></tr>
+                        <tr><td><strong>Data Studi</strong></td><td>Perguruan Tinggi/Program Studi, No & Tgl Surat Tugas Belajar, Tgl mulai, Jangka waktu</td></tr>
+                        <tr><td><strong>Kinerja Akademik</strong></td><td>GPA/IP/degree classification sementara</td></tr>
+                        <tr><td><strong>Lampiran Wajib</strong></td><td>Kartu Hasil Studi (KHS) dan/atau dokumen sejenis</td></tr>
+                        <tr><td><strong>Informasi Studi</strong></td><td>Kendala/tantangan, peluang, dan rencana topik TA/Tesis/Disertasi</td></tr>
+                        <tr><td><strong>Total Beasiswa</strong></td><td>Total biaya pendidikan & hidup yang diperoleh periode ini</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mk-section">
+            <h3>⚠️ Konsekuensi Tidak Melapor</h3>
+            <div class="info-box red">
+                <strong>❌ Sanksi & Pembatalan</strong>
+                Berdasarkan Pasal 19 & 20, tidak melaporkan perkembangan studi dan telah diberi peringatan tertulis merupakan alasan <strong>pembatalan atau penghentian Tugas Belajar</strong>. Selain itu, dapat dikenakan sanksi kepegawaian sesuai peraturan disiplin PNS.
+            </div>
+        </div>
+    `;
+}
+
+
+/* ==========================================================
+   INFORMASI DIKLAT DAN BEASISWA (Berdasarkan PMK 34/2024)
+   ========================================================== */
+function renderInfoDiklatBeasiswa(item) {
+    document.getElementById('contentArea').innerHTML = `
+        <div class="article-head">
+            <h2>${item.icon} ${item.title}</h2>
+            <p>${item.desc || ''}</p>
+        </div>
+
+        <div class="mk-section">
+            <h3> Tentang Tugas Belajar (PMK 34/2024)</h3>
+            <p>Pengelolaan Tugas Belajar bagi PNS di lingkungan Kementerian Keuangan bertujuan untuk standardisasi pengelolaan dan pengembangan kompetensi melalui pendidikan yang menunjang tugas dan fungsi organisasi.</p>
+            <div class="info-box blue">
+                <strong>🎓 Jenjang Pendidikan</strong>
+                Meliputi Diploma III (DIII), Diploma IV (DIV), Sarjana (S1), Magister (S2), dan Doktor (S3) di dalam maupun luar negeri.
+            </div>
+        </div>
+
+        <div class="mk-section">
+            <h3>🔄 Jenis Tugas Belajar</h3>
+            <div class="compare-grid">
+                <div class="compare-card after">
+                    <h5>✓ Tugas Belajar DIBIAYAI</h5>
+                    <ul>
+                        <li>Dibiayai oleh Penyelenggara Beasiswa</li>
+                        <li>Tunjangan Kinerja: 75% (Diberhentikan) atau 100% (Tidak Diberhentikan)</li>
+                        <li>Ikatan Dinas: 2x masa studi (Diberhentikan) / 1x masa studi (Tidak Diberhentikan)</li>
+                    </ul>
+                </div>
+                <div class="compare-card before">
+                    <h5>⚠️ Tugas Belajar MANDIRI</h5>
+                    <ul>
+                        <li>Dibiayai secara mandiri oleh PNS</li>
+                        <li>Tunjangan Kinerja: 50% (Diberhentikan) atau 100% (Tidak Diberhentikan)</li>
+                        <li>Ikatan Dinas: 1x masa studi (khusus Diberhentikan)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mk-section">
+            <h3>✅ Persyaratan Utama (TB Dibiayai)</h3>
+            <p>Berdasarkan Pasal 6, peserta harus memenuhi:</p>
+            <div class="data-table-wrap">
+                <table class="data-table">
+                    <thead><tr><th>Kriteria</th><th>Ketentuan</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Masa Kerja</strong></td><td>Minimal 1 tahun sejak diangkat menjadi PNS</td></tr>
+                        <tr><td><strong>Sisa Masa Kerja</strong></td><td>3x Masa Pendidikan Normatif (Diberhentikan) / 2x (Tidak Diberhentikan)</td></tr>
+                        <tr><td><strong>Pangkat/Golongan</strong></td><td>DIII: II/a | S1/DIV: II/b | S2: III/a | S3: III/b</td></tr>
+                        <tr><td><strong>Kinerja</strong></td><td>Predikat minimal <strong>Baik</strong> dalam 2 tahun terakhir</td></tr>
+                        <tr><td><strong>Disiplin</strong></td><td>Tidak sedang menjalani hukuman disiplin sedang/berat</td></tr>
+                        <tr><td><strong>Riwayat TB</strong></td><td>Belum pernah menyelesaikan TB pada jenjang yang sama</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mk-section">
+            <h3>🏆 Tahapan Seleksi</h3>
+            <div class="timeline">
+                <div class="tl-step" data-step="1">
+                    <h4>Seleksi UPTB</h4>
+                    <div class="tl-sub">Diselenggarakan minimal 2x dalam 1 tahun</div>
+                    <div class="tl-content">Seleksi administrasi dan substansi oleh Unit Pengelola Tugas Belajar. Lulusan berhak mengikuti seleksi selanjutnya dalam jangka waktu 3 tahun.</div>
+                </div>
+                <div class="tl-step" data-step="2">
+                    <h4>Seleksi Penyelenggara Beasiswa</h4>
+                    <div class="tl-sub">LPDP, Beasiswa Unggulan, dll</div>
+                    <div class="tl-content">PNS mendaftar melalui aplikasi otomasi perkantoran. Dapat juga mendaftar di luar daftar UPTB dengan izin khusus (pendanaan penuh).</div>
+                </div>
+                <div class="tl-step" data-step="3">
+                    <h4>Seleksi Perguruan Tinggi</h4>
+                    <div class="tl-sub">Akreditasi Minimal B (Dalam Negeri)</div>
+                    <div class="tl-content">Program studi harus sesuai Rencana Kebutuhan TB. Untuk luar negeri, harus diakui oleh kementerian pendidikan.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mk-section">
+            <h3>🚀 Tugas Belajar Berkelanjutan</h3>
+            <div class="info-box green">
+                <strong>🎯 Lanjut Jenjang (Misal: S2 ke S3)</strong>
+                PNS dapat mengikuti TB Berkelanjutan maksimal 1 kali ke jenjang di atasnya secara berturut-turut, dengan syarat:
+                <ul style="margin-top:8px; margin-left:20px">
+                    <li>Ada tawaran dari Penyelenggara Beasiswa (pendanaan penuh)</li>
+                    <li>Program studi di perguruan tinggi yang sama & sesuai Rencana Kebutuhan</li>
+                    <li>Meraih predikat <strong>cumlaude</strong> atau setara, atau 3 peringkat terbaik</li>
+                    <li>Tidak pernah menjalani perpanjangan Surat Tugas Belajar sebelumnya</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mk-section">
+            <h3>⚖️ Ganti Kerugian & Ikatan Dinas</h3>
+            <div class="info-box red">
+                <strong>💰 Besaran Ganti Kerugian</strong>
+                Dikenakan jika TB dihentikan (drop out bukan karena kahar), melanggar disiplin, atau mengundurkan diri sebelum Ikatan Dinas selesai. Besaran: <strong>Seluruh biaya + denda 100%</strong> (untuk TB Diberhentikan termasuk gaji & tunjangan selama studi).
             </div>
         </div>
     `;
