@@ -1,0 +1,1434 @@
+<writeToFile>
+<path>tu-pedia.html</path>
+<content><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TU-Pedia | Direktorat Penerimaan dan Perencanaan Strategis</title>
+<!--
+=============================================
+TU-PEDIA  –  Buku Panduan Digital Tata Usaha
+Direktorat Penerimaan dan Perencanaan Strategis
+Direktorat Jenderal Bea dan Cukai
+
+Versi : 3.1 (Sidebar disederhanakan)
+- Sidebar hanya: Kepegawaian & Manajemen Kinerja
+- Agenda Direktur tetap di dashboard (home)
+=============================================
+-->
+
+<style>
+    :root {
+        --brand:        #1e3c72;
+        --brand-light:  #2a5298;
+        --brand-grad:   linear-gradient(135deg,#1e3c72,#2a5298);
+        --bg:           #f4f6f9;
+        --card:         #ffffff;
+        --text:         #2c3e50;
+        --text2:        #5a6a7a;
+        --muted:        #95a5b6;
+        --border:       #e2e8f0;
+        --shadow:       0 2px 8px rgba(0,0,0,.06);
+        --shadow-hover: 0 6px 20px rgba(0,0,0,.10);
+        --green:  #27ae60;
+        --orange: #e67e22;
+        --red:    #e74c3c;
+        --blue:   #2980b9;
+        --purple: #8e44ad;
+        --yellow: #f1c40f;
+        --radius: 10px;
+        --sidebar-w: 290px;
+        --speed: .25s;
+    }
+    [data-theme="dark"] {
+    --bg:     #111827;
+    --card:   #1f2937;
+    --text:   #f1f5f9;
+    --text2:  #cbd5e1;
+    --muted:  #94a3b8;
+    --border: #334155;
+    --shadow: 0 2px 8px rgba(0,0,0,.30);
+    --shadow-hover: 0 6px 20px rgba(0,0,0,.45);
+
+    /* Brand colors terang untuk dark mode */
+    --brand:       #7ba4e8;
+    --brand-light: #93b5f0;
+    --brand-grad:  linear-gradient(135deg,#2a5298,#4a7cc9);
+}
+
+[data-theme="dark"] .page-title,
+[data-theme="dark"] .article-head h2,
+[data-theme="dark"] .mk-section h3,
+[data-theme="dark"] .mk-section h4,
+[data-theme="dark"] .main-card h3,
+[data-theme="dark"] .m-card .mc-title,
+[data-theme="dark"] .section-label,
+[data-theme="dark"] .calc-result .value,
+[data-theme="dark"] .calc-wrap h4,
+[data-theme="dark"] .agenda-live-head h4,
+[data-theme="dark"] .quiz-card .q-text,
+[data-theme="dark"] .faq-q,
+[data-theme="dark"] .tl-step h4,
+[data-theme="dark"] .compare-card h5,
+[data-theme="dark"] .rating-card h5 {
+    color: #93b5f0;
+}
+
+[data-theme="dark"] .stat-card-value {
+    color: #93b5f0;
+}
+
+[data-theme="dark"] .formula-box {
+    background: #1a2332;
+    border-color: #4a7cc9;
+}
+
+[data-theme="dark"] .formula-box .formula-main {
+    color: #93b5f0;
+}
+
+[data-theme="dark"] .info-box.blue { background: rgba(123,164,232,.12); }
+[data-theme="dark"] .info-box.green { background: rgba(74,222,128,.12); }
+[data-theme="dark"] .info-box.orange { background: rgba(251,191,36,.12); }
+[data-theme="dark"] .info-box.red { background: rgba(248,113,113,.12); }
+[data-theme="dark"] .info-box.purple { background: rgba(192,132,252,.12); }
+
+[data-theme="dark"] .quiz-opt.correct { background: rgba(74,222,128,.15); border-color: #4ade80; }
+[data-theme="dark"] .quiz-opt.wrong { background: rgba(248,113,113,.15); border-color: #f87171; }
+[data-theme="dark"] .quiz-feedback.correct { background: rgba(74,222,128,.12); border-color: #4ade80; }
+[data-theme="dark"] .quiz-feedback.wrong { background: rgba(248,113,113,.12); border-color: #f87171; }
+
+[data-theme="dark"] .rating-card.high { border-color: #4ade80; background: rgba(74,222,128,.08); }
+[data-theme="dark"] .rating-card.mid { border-color: #60a5fa; background: rgba(96,165,250,.08); }
+[data-theme="dark"] .rating-card.low { border-color: #f87171; background: rgba(248,113,113,.08); }
+
+[data-theme="dark"] .compare-card.before { background: rgba(248,113,113,.08); border-color: rgba(248,113,113,.4); }
+[data-theme="dark"] .compare-card.after { background: rgba(74,222,128,.08); border-color: rgba(74,222,128,.4); }
+
+[data-theme="dark"] .calc-result.secondary { background: #1a2332; border-color: #4a7cc9; }
+
+[data-theme="dark"] .data-table th { background: linear-gradient(135deg,#2a5298,#4a7cc9); }
+[data-theme="dark"] .data-table tr:hover td { background: #1a2332; }
+
+[data-theme="dark"] .agenda-iframe-wrap { background: #1a2332; }
+
+[data-theme="dark"] .sub-nav { background: rgba(0,0,0,.25); }
+
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;transition:background var(--speed),color var(--speed)}
+    a{color:var(--brand-light);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .app{display:flex;min-height:100vh}
+
+    /* SIDEBAR */
+    .sidebar{width:var(--sidebar-w);background:var(--brand-grad);color:#fff;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:900;transition:transform var(--speed);display:flex;flex-direction:column}
+    .sidebar-head{padding:22px 20px 18px;border-bottom:1px solid rgba(255,255,255,.12)}
+    .logo-box{width:52px;height:52px;background:rgba(255,255,255,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:10px}
+    .sidebar-head h1{font-size:1.35rem;letter-spacing:.3px}
+    .sidebar-head .sub{font-size:.78rem;opacity:.72;margin-top:2px;line-height:1.4}
+    .nav{flex:1;padding:14px 0;overflow-y:auto}
+    .nav-item{padding:10px 20px;cursor:pointer;display:flex;align-items:center;gap:10px;border-left:3px solid transparent;transition:all .15s;font-size:.92rem}
+    .nav-item:hover{background:rgba(255,255,255,.1);border-left-color:#fff}
+    .nav-item.active{background:rgba(255,255,255,.16);border-left-color:#fff;font-weight:600}
+    .nav-item .ico{width:20px;text-align:center;flex-shrink:0}
+    .nav-item .arrow{margin-left:auto;font-size:.7rem;transition:transform .2s}
+    .nav-item .arrow.open{transform:rotate(90deg)}
+    .sub-nav{display:none;background:rgba(0,0,0,.1)}
+    .sub-nav.open{display:block}
+    .sub-nav .nav-item{padding-left:36px;font-size:.88rem}
+    .sub-nav .sub-nav .nav-item{padding-left:52px;font-size:.84rem}
+    .sidebar-foot{padding:14px 20px;border-top:1px solid rgba(255,255,255,.12);font-size:.75rem;opacity:.6;text-align:center}
+
+    /* MAIN */
+    .main{flex:1;margin-left:var(--sidebar-w);padding:24px 32px 40px;min-width:0}
+    .topbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+    .burger{display:none;cursor:pointer;font-size:1.5rem;background:none;border:none;color:var(--text)}
+    .search-box{position:relative;flex:1;min-width:200px;max-width:420px}
+    .search-box input{width:100%;padding:10px 38px 10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);color:var(--text);font-size:.92rem;transition:border var(--speed)}
+    .search-box input:focus{outline:none;border-color:var(--brand-light)}
+    .search-box .s-ico{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);cursor:pointer}
+    .search-results{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-hover);max-height:360px;overflow-y:auto;display:none;z-index:800}
+    .search-results.open{display:block}
+    .sr-item{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .15s}
+    .sr-item:hover{background:var(--bg)}
+    .sr-item:last-child{border:none}
+    .sr-item b{display:block;font-size:.9rem}
+    .sr-item small{color:var(--muted);font-size:.78rem}
+    .topbar-actions{display:flex;align-items:center;gap:8px;margin-left:auto}
+    .tb-btn{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:8px 10px;cursor:pointer;font-size:1.15rem;color:var(--text);transition:all .15s;display:flex;align-items:center}
+    .tb-btn:hover{border-color:var(--brand-light);color:var(--brand-light)}
+
+    .breadcrumb{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:.84rem;color:var(--muted);margin-bottom:18px}
+    .breadcrumb span{cursor:pointer;transition:color .15s}
+    .breadcrumb span:hover{color:var(--brand-light)}
+    .breadcrumb .sep{cursor:default;color:var(--border)}
+    .breadcrumb .current{color:var(--text);font-weight:600;cursor:default}
+
+    /* HOME */
+    .hero-banner{background:var(--brand-grad);color:#fff;border-radius:var(--radius);padding:32px 28px;margin-bottom:26px}
+    .hero-banner h2{font-size:1.6rem;margin-bottom:6px}
+    .hero-banner p{opacity:.85;font-size:.95rem;max-width:600px}
+    .section-label{font-size:1.1rem;font-weight:600;color:var(--brand);margin:10px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+    .main-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:32px}
+    .main-card{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);cursor:pointer;transition:all var(--speed);border-left:5px solid var(--brand-light);display:flex;flex-direction:column;gap:10px}
+    .main-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-left-color:var(--brand)}
+    .main-card .mc-icon{font-size:2.2rem}
+    .main-card h3{font-size:1.25rem;color:var(--brand)}
+    .main-card p{font-size:.9rem;color:var(--text2)}
+    .main-card .mc-meta{font-size:.8rem;color:var(--muted);margin-top:auto;padding-top:10px;border-top:1px solid var(--border)}
+
+    /* AGENDA LIVE */
+    .agenda-live{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px}
+    .agenda-live-head{display:flex;align-items:center;gap:14px;padding:18px 22px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+    .agenda-live-head .al-icon{width:46px;height:46px;border-radius:10px;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;flex-shrink:0}
+    .agenda-live-head .al-info{flex:1;min-width:200px}
+    .agenda-live-head h4{font-size:1.05rem;color:var(--brand);margin-bottom:2px}
+    .agenda-live-head p{font-size:.82rem;color:var(--text2)}
+    .agenda-live-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .al-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--text2);transition:all .15s;text-decoration:none}
+    .al-btn:hover{border-color:var(--brand-light);color:var(--brand-light);text-decoration:none}
+    .al-btn-primary{background:var(--brand-grad);color:#fff;border-color:transparent}
+    .al-btn-primary:hover{opacity:.9;color:#fff}
+    .agenda-iframe-wrap{position:relative;width:100%;height:700px;background:var(--bg)}
+    .agenda-iframe-wrap iframe{width:100%;height:100%;border:none;background:#fff}
+    .agenda-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:var(--bg);color:var(--muted);font-size:.9rem;pointer-events:none;transition:opacity .3s}
+    .agenda-loading.hidden{opacity:0}
+    .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--brand-light);border-radius:50%;animation:spin .8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .agenda-error{padding:30px;text-align:center;background:var(--bg);color:var(--text2);font-size:.9rem}
+    .agenda-error strong{color:var(--red);display:block;margin-bottom:8px;font-size:1rem}
+
+    /* CATEGORY PAGE */
+    .page-title{font-size:1.35rem;color:var(--brand);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;margin-bottom:30px}
+    .m-card{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);cursor:pointer;transition:all var(--speed);border-left:4px solid var(--brand-light);display:flex;flex-direction:column}
+    .m-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-left-color:var(--brand)}
+    .m-card .mc-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .m-card .mc-ico{width:42px;height:42px;border-radius:10px;background:var(--brand-grad);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;flex-shrink:0}
+    .m-card .mc-title{font-size:1rem;font-weight:600;color:var(--brand)}
+    .m-card .mc-desc{font-size:.85rem;color:var(--text2);flex:1}
+    .m-card .mc-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:.78rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+    .link-badge{color:var(--blue);font-weight:600;font-size:.8rem}
+
+    /* ARTICLE */
+    .article-head{margin-bottom:22px}
+    .article-head h2{font-size:1.4rem;color:var(--brand);margin-bottom:6px}
+    .article-head p{color:var(--text2);font-size:.92rem}
+    .accordion{margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--card)}
+    .acc-header{padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:10px;font-weight:600;font-size:.95rem;color:var(--text);transition:background .15s;user-select:none}
+    .acc-header:hover{background:var(--bg)}
+    .acc-header .acc-arrow{margin-left:auto;transition:transform .2s;font-size:.75rem;color:var(--muted)}
+    .acc-header.open .acc-arrow{transform:rotate(180deg)}
+    .acc-body{display:none;padding:0 20px 18px;font-size:.9rem;color:var(--text2);line-height:1.7}
+    .acc-body.open{display:block}
+    .ph{background:var(--bg);border:2px dashed var(--border);border-radius:8px;padding:18px;color:var(--muted);font-size:.88rem;text-align:center}
+
+    /* MK STYLES */
+    .mk-hero{background:var(--brand-grad);color:#fff;border-radius:var(--radius);padding:30px 28px;margin-bottom:24px}
+    .mk-hero .tag{display:inline-block;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:12px;letter-spacing:.5px}
+    .mk-hero h2{font-size:1.5rem;margin-bottom:8px}
+    .mk-hero p{opacity:.88;font-size:.92rem;max-width:700px}
+    .mk-subnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;padding:12px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .mk-subnav a{padding:7px 14px;border-radius:8px;font-size:.82rem;font-weight:500;background:var(--bg);color:var(--text2);cursor:pointer;transition:all .15s;border:1px solid transparent;text-decoration:none}
+    .mk-subnav a:hover{border-color:var(--brand-light);color:var(--brand-light);text-decoration:none}
+    .mk-subnav a.active{background:var(--brand-grad);color:#fff}
+    .mk-section{background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);margin-bottom:20px}
+    .mk-section h3{font-size:1.15rem;color:var(--brand);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+    .mk-section h4{font-size:1rem;color:var(--brand);margin:18px 0 10px}
+    .mk-section p{font-size:.9rem;color:var(--text2);margin-bottom:10px}
+    .mk-section ul,.mk-section ol{margin:10px 0 14px 22px;font-size:.9rem;color:var(--text2)}
+    .mk-section li{margin-bottom:6px}
+    .info-box{padding:14px 18px;border-radius:8px;margin:12px 0;font-size:.88rem;line-height:1.6}
+    .info-box.blue{background:rgba(41,128,185,.1);border-left:4px solid var(--blue);color:var(--text)}
+    .info-box.orange{background:rgba(230,126,34,.1);border-left:4px solid var(--orange);color:var(--text)}
+    .info-box.green{background:rgba(39,174,96,.1);border-left:4px solid var(--green);color:var(--text)}
+    .info-box.red{background:rgba(231,76,60,.1);border-left:4px solid var(--red);color:var(--text)}
+    .info-box.purple{background:rgba(142,68,173,.1);border-left:4px solid var(--purple);color:var(--text)}
+    .info-box strong{display:block;margin-bottom:4px}
+    .formula-box{background:var(--bg);border:2px solid var(--brand-light);border-radius:var(--radius);padding:18px 22px;margin:14px 0;text-align:center;font-family:'Courier New',monospace}
+    .formula-box .formula-main{font-size:1.1rem;font-weight:700;color:var(--brand);margin-bottom:8px;word-break:break-word}
+    .formula-box .formula-sub{font-size:.82rem;color:var(--text2);line-height:1.7}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+    .compare-card{padding:18px;border-radius:var(--radius);border:1px solid var(--border)}
+    .compare-card.before{background:rgba(231,76,60,.05);border-color:rgba(231,76,60,.3)}
+    .compare-card.after{background:rgba(39,174,96,.05);border-color:rgba(39,174,96,.3)}
+    .compare-card h5{font-size:.95rem;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+    .compare-card.before h5{color:var(--red)}
+    .compare-card.after h5{color:var(--green)}
+    .compare-card ul{list-style:none;margin:0;padding:0}
+    .compare-card li{padding:6px 0;font-size:.85rem;color:var(--text2);border-bottom:1px dashed var(--border)}
+    .compare-card li:last-child{border:none}
+    .timeline{position:relative;padding-left:30px;margin:14px 0}
+    .timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border)}
+    .tl-step{position:relative;margin-bottom:22px}
+    .tl-step::before{content:attr(data-step);position:absolute;left:-30px;top:0;width:24px;height:24px;border-radius:50%;background:var(--brand-grad);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+    .tl-step h4{font-size:1rem;color:var(--brand);margin-bottom:4px}
+    .tl-step .tl-sub{font-size:.78rem;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+    .tl-step .tl-content{font-size:.88rem;color:var(--text2);line-height:1.65}
+    .data-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem;background:var(--card)}
+    .data-table th{background:var(--brand-grad);color:#fff;padding:10px 12px;text-align:left;font-weight:600;font-size:.82rem}
+    .data-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text2)}
+    .data-table tr:hover td{background:var(--bg)}
+    .data-table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border)}
+    .rating-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:14px 0}
+    .rating-card{padding:18px;border-radius:var(--radius);border:2px solid var(--border)}
+    .rating-card.high{border-color:var(--green);background:rgba(39,174,96,.04)}
+    .rating-card.mid{border-color:var(--blue);background:rgba(41,128,185,.04)}
+    .rating-card.low{border-color:var(--red);background:rgba(231,76,60,.04)}
+    .rating-card h5{font-size:.95rem;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+    .rating-card.high h5{color:var(--green)}
+    .rating-card.mid h5{color:var(--blue)}
+    .rating-card.low h5{color:var(--red)}
+    .rating-card .range{font-size:.82rem;color:var(--muted);margin-bottom:10px;font-weight:600}
+    .rating-card ul{margin:0 0 0 18px;font-size:.82rem;color:var(--text2)}
+    .rating-card li{margin-bottom:4px}
+    .calc-wrap{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);margin-bottom:18px}
+    .calc-wrap h4{font-size:1rem;color:var(--brand);margin-bottom:12px}
+    .calc-form{display:grid;gap:12px}
+    .calc-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;align-items:end}
+    .calc-field{display:flex;flex-direction:column;gap:4px}
+    .calc-field label{font-size:.78rem;color:var(--text2);font-weight:600}
+    .calc-field input,.calc-field select{padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:.88rem;font-family:inherit}
+    .calc-field input:focus,.calc-field select:focus{outline:none;border-color:var(--brand-light)}
+    .calc-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .calc-btn{padding:8px 16px;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:all .15s}
+    .calc-btn-primary{background:var(--brand-grad);color:#fff}
+    .calc-btn-primary:hover{opacity:.9}
+    .calc-btn-ghost{background:var(--bg);color:var(--text);border:1px solid var(--border)}
+    .calc-btn-danger{background:var(--red);color:#fff}
+    .calc-result{margin-top:16px;padding:18px;border-radius:var(--radius);background:var(--brand-grad);color:#fff;text-align:center}
+    .calc-result .label{font-size:.82rem;opacity:.85;margin-bottom:4px}
+    .calc-result .value{font-size:2rem;font-weight:700;letter-spacing:.5px}
+    .calc-result .sub{font-size:.78rem;opacity:.8;margin-top:6px}
+    .calc-result.secondary{background:var(--bg);color:var(--text);border:2px solid var(--brand-light)}
+    .faq-search{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);color:var(--text);font-size:.92rem;margin-bottom:16px}
+    .faq-search:focus{outline:none;border-color:var(--brand-light)}
+    .faq-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;background:var(--card)}
+    .faq-q{padding:14px 18px;cursor:pointer;font-weight:600;font-size:.9rem;color:var(--text);display:flex;align-items:center;gap:10px;transition:background .15s}
+    .faq-q:hover{background:var(--bg)}
+    .faq-q .faq-arrow{margin-left:auto;transition:transform .2s;color:var(--muted);font-size:.75rem}
+    .faq-item.open .faq-q .faq-arrow{transform:rotate(180deg)}
+    .faq-a{display:none;padding:0 18px 14px;font-size:.88rem;color:var(--text2);line-height:1.7;border-top:1px solid var(--border)}
+    .faq-item.open .faq-a{display:block;padding-top:14px}
+    .faq-empty{text-align:center;padding:30px;color:var(--muted);font-size:.9rem}
+    .quiz-progress{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+    .quiz-progress-bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+    .quiz-progress-fill{height:100%;background:var(--brand-grad);transition:width .3s}
+    .quiz-progress-text{font-size:.82rem;color:var(--muted);font-weight:600;min-width:60px;text-align:right}
+    .quiz-card{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:16px}
+    .quiz-card .q-num{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+    .quiz-card .q-text{font-size:1rem;color:var(--text);font-weight:600;margin-bottom:16px;line-height:1.5}
+    .quiz-options{display:grid;gap:10px}
+    .quiz-opt{padding:12px 16px;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:.9rem;color:var(--text);transition:all .15s;background:var(--card);display:flex;align-items:center;gap:10px}
+    .quiz-opt:hover{border-color:var(--brand-light);background:var(--bg)}
+    .quiz-opt.selected{border-color:var(--brand-light);background:rgba(42,82,152,.08)}
+    .quiz-opt.correct{border-color:var(--green);background:rgba(39,174,96,.1)}
+    .quiz-opt.wrong{border-color:var(--red);background:rgba(231,76,60,.1)}
+    .quiz-opt .opt-letter{width:24px;height:24px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0}
+    .quiz-opt.correct .opt-letter{background:var(--green);color:#fff}
+    .quiz-opt.wrong .opt-letter{background:var(--red);color:#fff}
+    .quiz-feedback{margin-top:14px;padding:12px 16px;border-radius:8px;font-size:.88rem;line-height:1.6;display:none}
+    .quiz-feedback.show{display:block}
+    .quiz-feedback.correct{background:rgba(39,174,96,.1);border-left:4px solid var(--green);color:var(--text)}
+    .quiz-feedback.wrong{background:rgba(231,76,60,.1);border-left:4px solid var(--red);color:var(--text)}
+    .quiz-nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px;flex-wrap:wrap}
+    .quiz-score{background:var(--brand-grad);color:#fff;border-radius:var(--radius);padding:30px;text-align:center;margin:20px 0}
+    .quiz-score .score-num{font-size:3rem;font-weight:800;margin:10px 0}
+    .quiz-score .score-label{font-size:.9rem;opacity:.85}
+    .quiz-score .score-msg{margin-top:10px;font-size:1rem}
+
+    .footer{text-align:center;padding:20px;font-size:.8rem;color:var(--muted);border-top:1px solid var(--border);margin-top:30px}
+
+    @media(max-width:768px){
+        .sidebar{transform:translateX(-100%)}
+        .sidebar.open{transform:translateX(0)}
+        .main{margin-left:0;padding:16px}
+        .burger{display:block}
+        .hero-banner,.mk-hero{padding:22px 18px}
+        .hero-banner h2,.mk-hero h2{font-size:1.25rem}
+        .main-grid,.cards-grid{grid-template-columns:1fr}
+        .agenda-iframe-wrap{height:500px}
+        .compare-grid{grid-template-columns:1fr}
+        .rating-grid{grid-template-columns:1fr}
+        .mk-section{padding:18px}
+        .calc-row{grid-template-columns:1fr}
+    }
+    .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:899}
+    .overlay.open{display:block}
+    @media print{
+        .sidebar,.topbar,.breadcrumb,.footer,.overlay,.agenda-live-actions,.mk-subnav,.calc-actions,.quiz-nav{display:none!important}
+        .main{margin:0;padding:10px}
+        .acc-body,.faq-a{display:block!important}
+        body{background:#fff;color:#000}
+    }
+</style>
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+        <div class="logo-box">🏛️</div>
+        <h1>TU-Pedia</h1>
+        <div class="sub">Direktorat Penerimaan dan<br>Perencanaan Strategis<br>Direktorat Jenderal Bea dan Cukai</div>
+    </div>
+    <nav class="nav" id="sideNav"></nav>
+    <div class="sidebar-foot">TU PPS &copy; 2026</div>
+</aside>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<div class="main">
+    <div class="topbar">
+        <button class="burger" onclick="toggleSidebar()">☰</button>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Cari layanan, prosedur, FAQ…" oninput="onSearch(this.value)">
+            <span class="s-ico">🔍</span>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+        <div class="topbar-actions">
+            <button class="tb-btn" onclick="toggleTheme()" title="Mode Gelap/Terang" id="themeBtn">🌙</button>
+        </div>
+    </div>
+
+    <div class="breadcrumb" id="breadcrumb"></div>
+    <div id="contentArea"></div>
+
+    <div class="footer">
+        TU-Pedia &mdash; TU PPS &mdash; Direktorat Penerimaan dan Perencanaan Strategis, Direktorat Jenderal Bea dan Cukai &copy; 2026
+    </div>
+</div>
+</div>
+
+<script>
+/* ==========================================================
+KONFIGURASI SPREADSHEET AGENDA
+========================================================== */
+const SPREADSHEET_EMBED_URL = 'https://docs.google.com/spreadsheets/d/e/YOUR_PUBLISHED_ID/pubhtml?widget=true&headers=false';
+const SPREADSHEET_DIRECT_URL = 'https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit?usp=sharing';
+
+
+/* ==========================================================
+DATA STRUKTUR MENU
+Sidebar hanya menampilkan: Kepegawaian & Manajemen Kinerja
+Agenda Direktur hanya muncul di dashboard (home)
+========================================================== */
+const MENU_DATA = [
+{
+id: 'kepegawaian', title: 'Kepegawaian', icon: '👥', cat: 'kepegawaian',
+desc: 'Layanan seputar administrasi, pengembangan, dan manajemen pegawai.',
+children: [
+{ id: 'tata-naskah', title: 'Tata Naskah Dinas', icon: '📄', cat: 'kepegawaian', desc: 'Pengelolaan naskah dinas masuk dan keluar.' },
+{ id: 'cuti-presensi', title: 'Cuti & Presensi', icon: '📅', cat: 'kepegawaian', desc: 'Konfirmasi kehadiran, perjalanan dinas, dan pengajuan cuti.',
+children: [
+{ id: 'konfirmasi-kehadiran', title: 'Konfirmasi Kehadiran', icon: '✅', cat: 'kepegawaian', desc: 'Presensi harian pegawai.' },
+{ id: 'e-perjadin', title: 'Pelaporan Perjalanan Dinas (E-Perjadin)', icon: '✈️', cat: 'kepegawaian', desc: 'Pelaporan perjalanan dinas secara elektronik.' },
+{ id: 'cuti', title: 'Cuti', icon: '🏖️', cat: 'kepegawaian', desc: 'Pengajuan dan persetujuan cuti pegawai.' }
+] },
+{ id: 'pendidikan', title: 'Pendidikan dan Pengembangan Pegawai', icon: '🎓', cat: 'kepegawaian', desc: 'Studi, diklat, beasiswa, dan pengembangan kompetensi.',
+children: [
+{ id: 'laporan-perkembangan-studi', title: 'Laporan Perkembangan Studi', icon: '📚', cat: 'kepegawaian', desc: 'Pelaporan kemajuan studi pegawai.' },
+{ id: 'laporan-selesai-studi', title: 'Laporan Selesai Studi', icon: '🎓', cat: 'kepegawaian', desc: 'Pelaporan penyelesaian studi.' },
+{ id: 'info-diklat-beasiswa', title: 'Informasi Diklat dan Beasiswa', icon: 'ℹ️', cat: 'kepegawaian', desc: 'Informasi peluang diklat dan beasiswa.' },
+{ id: 'gelar-akademik', title: 'Pencantuman Gelar Akademik', icon: '🏅', cat: 'kepegawaian', desc: 'Prosedur pencantuman gelar akademik.' },
+{ id: 'kenaikan-pangkat', title: 'Kenaikan Pangkat dan Grading', icon: '📈', cat: 'kepegawaian', desc: 'Proses kenaikan pangkat dan grading.' },
+{ id: 'learning-org', title: 'Learning Organization', icon: '🎯', cat: 'kepegawaian', desc: 'Program organisasi pembelajar.' }
+] },
+{ id: 'administrasi-kepegawaian', title: 'Administrasi Kepegawaian', icon: '📝', cat: 'kepegawaian', desc: 'Laporan kelahiran, perkawinan, dan penerbitan KARIS/KARSU.',
+children: [
+{ id: 'laporan-kelahiran', title: 'Laporan Kelahiran / Pertambahan Anak', icon: '👶', cat: 'kepegawaian', desc: 'Pelaporan kelahiran atau pertambahan anak.' },
+{ id: 'laporan-perkawinan', title: 'Laporan Perkawinan Pertama', icon: '💍', cat: 'kepegawaian', desc: 'Pelaporan perkawinan pertama pegawai.' },
+{ id: 'karis-karsu', title: 'Penerbitan KARIS/KARSU', icon: '💳', cat: 'kepegawaian', desc: 'Penerbitan Kartu Istri / Kartu Suami.' }
+] },
+{ id: 'bmn', title: 'Pengadaan dan Perbaikan BMN', icon: '🏢', cat: 'kepegawaian', desc: 'Pengadaan dan perbaikan Barang Milik Negara, termasuk seragam.' },
+{ id: 'update-data', title: 'Update Data Pegawai', icon: '📊', cat: 'kepegawaian', desc: 'Pemutakhiran data pegawai di berbagai sistem.',
+children: [
+{ id: 'deklarasi-hris', title: 'Deklarasi Data HRIS', icon: '📋', cat: 'kepegawaian', desc: 'Deklarasi dan verifikasi data di sistem HRIS.' },
+{ id: 'data-terbaru', title: 'Data Pegawai Terbaru', icon: '🔄', cat: 'kepegawaian', desc: 'Pemutakhiran data pegawai terkini.' },
+{ id: 'profiling', title: 'Profiling Pegawai', icon: '👤', cat: 'kepegawaian', desc: 'Profil kompetensi dan karir pegawai.' },
+{ id: 'sk-bekerja', title: 'Surat Keterangan Bekerja', icon: '📄', cat: 'kepegawaian', desc: 'Penerbitan surat keterangan bekerja.' },
+{ id: 'dokumen-kinerja', title: 'Dokumen Kinerja Pegawai', icon: '📈', cat: 'kepegawaian', desc: 'Pengelolaan dokumen kinerja pegawai.' }
+] },
+{ id: 'mutasi', title: 'Mutasi', icon: '🔄', cat: 'kepegawaian', desc: 'Pengelolaan mutasi pegawai.' },
+{ id: 'magang', title: 'Magang', icon: '💼', cat: 'kepegawaian', desc: 'Program magang dan internship.' },
+{ id: 'layanan-aplikasi', title: 'Layanan Aplikasi', icon: '💻', cat: 'kepegawaian', desc: 'Dukungan teknis aplikasi dan sistem.',
+children: [
+{ id: 'helpdesk', title: 'HelpDesk', icon: '🛠️', cat: 'kepegawaian', desc: 'Layanan bantuan teknis.' },
+{ id: 'e-sign', title: 'E-Sign', icon: '✍️', cat: 'kepegawaian', desc: 'Tanda tangan elektronik.' },
+{ id: 'ceisa-care', title: 'CEISA-Care', icon: '💬', cat: 'kepegawaian', desc: 'Layanan dukungan CEISA.' },
+{ id: 'user-ceisa', title: 'Penambahan User CEISA', icon: '👥', cat: 'kepegawaian', desc: 'Pengajuan penambahan pengguna CEISA.' }
+] },
+{ id: 'integritas', title: 'Penguatan Integritas', icon: '⭐', cat: 'kepegawaian', desc: 'Program penguatan integritas dan kepatuhan.' }
+]
+},
+{
+id: 'kinerja', title: 'Manajemen Kinerja', icon: '📈', cat: 'kinerja',
+desc: 'Panduan interaktif KMK-127/2026 tentang manajemen kinerja pegawai.',
+children: [
+{ id: 'mk-ringkasan', title: 'Ringkasan Kebijakan', icon: '📖', cat: 'kinerja', desc: 'Urgensi perubahan dan perbandingan KMK-300/2022 vs KMK-127/2026.' },
+{ id: 'mk-alur', title: 'Alur Siklus Kinerja', icon: '🔄', cat: 'kinerja', desc: '4 tahap siklus: Perencanaan, Pelaksanaan, Evaluasi, Pelaporan.' },
+{ id: 'mk-skp-iki', title: 'SKP & Ketentuan IKI', icon: '📋', cat: 'kinerja', desc: 'Jumlah IKI per jenjang jabatan dan ketentuan penyusunan SKP.' },
+{ id: 'mk-kalkulator-nhk', title: 'Kalkulator NHK', icon: '🧮', cat: 'kinerja', desc: 'Hitung Nilai Hasil Kerja secara interaktif.' },
+{ id: 'mk-kalkulator-nkp', title: 'Kalkulator NKP', icon: '📊', cat: 'kinerja', desc: 'Hitung Nilai Kinerja Pegawai dengan formula lengkap.' },
+{ id: 'mk-perilaku', title: 'Perilaku Kerja & Disiplin', icon: '⭐', cat: 'kinerja', desc: '7 kategori rating perilaku dan simulasi dampak hukuman disiplin.' },
+{ id: 'mk-faq', title: 'FAQ', icon: '❓', cat: 'kinerja', desc: 'Pertanyaan yang sering diajukan seputar manajemen kinerja.' },
+{ id: 'mk-kuis', title: 'Kuis Interaktif', icon: '🎯', cat: 'kinerja', desc: 'Uji pemahaman Anda tentang KMK-127/2026.' }
+]
+}
+];
+
+
+/* ==========================================================
+DATA FAQ & KUIS (tidak berubah)
+========================================================== */
+const MK_FAQ = [
+{ q: 'Apa itu KMK-127/2026?', a: 'KMK-127/2026 adalah peraturan Menteri Keuangan terbaru tentang Manajemen Kinerja Pegawai yang menggantikan KMK-300/2022. Peraturan ini memperkenalkan formula NKP baru dengan melibatkan NKO, Tim Penilai Kinerja (TPK), serta dampak hukuman disiplin terhadap nilai kinerja.' },
+{ q: 'Apa perbedaan utama dengan KMK-300/2022?', a: 'Perbedaan utama: (1) NKO kini menjadi komponen NKP dengan bobot dinamis (50/30/10%); (2) Ada Tim Penilai Kinerja (TPK) yang berwenang menetapkan Nilai Koreksi & Dampak; (3) Hukuman disiplin memengaruhi NKP; (4) HKT dihapus dan diganti Portofolio Kinerja; (5) Penguatan IKI untuk JF Keuangan dan IKI mandatory.' },
+{ q: 'Apa formula NKP yang baru?', a: 'NKP Awal = (75% × NHK) + (25% × NPK). Hasil Penghitungan = NKP Awal + Nilai Koreksi − Nilai Hukdis ± Nilai Dampak. NKP = (bobot × Hasil Penghitungan) + (bobot × NKO), dengan bobot dinamis 50:50, 30:70, atau 10:90 tergantung kategori pegawai.' },
+{ q: 'Apa itu NHK dan bagaimana cara menghitungnya?', a: 'NHK (Nilai Hasil Kerja) adalah Σ (Nilai Kualitas Capaian IKI × Bobot Tertimbang). Nilai Kualitas Capaian IKI = Indeks Capaian IKI (maks 120) × Nilai K3. Bobot Tertimbang dihitung dari proporsi K3 × Bobot Waktu terhadap total.' },
+{ q: 'Apa itu NKO dan mengapa penting?', a: 'NKO (Nilai Kinerja Organisasi) adalah capaian kinerja unit organisasi yang kini menjadi komponen NKP dengan bobot dinamis. NKO penting karena menghubungkan kinerja individu dengan kinerja organisasi.' },
+{ q: 'Berapa bobot NKO dalam NKP?', a: 'Terdapat 3 skema bobot: (1) 50:50 (Hasil:NKO) untuk Pimpinan UPK/1 tingkat di bawah & JF substansi; (2) 30:70 untuk ≥2 tingkat di bawah Pimpinan UPK & JF non-substansi; (3) 10:90 untuk semua kategori bila Hasil < NKO.' },
+{ q: 'Apa itu TPK dan apa fungsinya?', a: 'TPK (Tim Penilai Kinerja) adalah tim yang berwenang menetapkan Nilai Koreksi dan Nilai Dampak (Pelanggaran Disiplin & Perilaku) melalui sidang TPK triwulanan dan tahunan.' },
+{ q: 'Bagaimana hukuman disiplin memengaruhi NKP?', a: 'Hukuman disiplin memengaruhi NKP melalui MPJHD (Nilai Hukdis) dengan bobot: Ringan 10%, Sedang 25%, Berat 40%. Dikenakan selama 2–4 periode triwulanan tergantung beratnya.' },
+{ q: 'Apa itu 7 kategori rating perilaku kerja?', a: 'Terdapat 7 kategori rating perilaku: Di Atas Ekspektasi (3 tingkat: >100–105, >105–115, >115–120), Sesuai Ekspektasi (2 tingkat: 90–<95, 95–100), Di Bawah Ekspektasi (2 tingkat: 70–<90, <70). Setiap tingkat mensyaratkan jumlah perilaku kunci minimal.' },
+{ q: 'Berapa jumlah IKI yang boleh disusun?', a: 'Bervariasi per jenjang: PPT Madya (Pimpinan UPK: min sesuai RHK, maks 25); PPT Pratama (maks 20); Administrator (maks 15); Pengawas (maks 7); Pelaksana (maks 6). Untuk non-Pimpinan UPK, minimum 3 untuk semua jenjang.' },
+{ q: 'Apa itu SKP dan bagaimana proses penetapannya?', a: 'SKP (Sasaran Kinerja Pegawai) adalah rencana kinerja tahunan. Proses: (1) Update data di HRIS; (2) Cascade IKI dari atasan; (3) Buat konsep SKP (pilih SS, susun IKI, input target); (4) Reviu & approval atasan; (5) Penetapan via TTE di Nadine.' },
+{ q: 'Apa itu IPR dan siapa yang melakukan?', a: 'IPR (Intervensi Pengembangan Rendah) adalah validasi capaian kinerja melalui dialog kinerja periodik, dilakukan oleh Atsung (Atasan Langsung), Konselor Internal, dan Konselor Profesional.' },
+{ q: 'Apa itu DEK-HEK?', a: 'DEK-HEK (Dokumen Evaluasi Kinerja – Hasil Evaluasi Kinerja) adalah dokumen hasil evaluasi kinerja triwulanan dan tahunan yang ditetapkan via Nadine. Setelah ditetapkan, DEK-HEK tidak dapat diubah.' },
+{ q: 'Apa itu Evaluasi 360°?', a: 'Evaluasi 360° adalah penilaian perilaku kerja yang memperhatikan masukan dari berbagai sisi: atasan, rekan sejawat, dan bawahan, dengan memperhatikan perilaku kunci (anchor behaviour), keteladanan, dan pengaruh positif.' },
+{ q: 'Apa itu Kalibrasi 115/120?', a: 'Kalibrasi adalah penyesuaian nilai NHK dan NPK agar konsisten. Maks 115 untuk umum, maks 120 untuk MK (Menteri Keuangan), WMK (Wakil Menteri Keuangan), dan JPTM (Jabatan Pimpinan Tinggi Madya).' },
+{ q: 'Apa itu Portofolio Kinerja?', a: 'Portofolio Kinerja menggantikan HKT (Hari Kerja Terhitung) dalam KMK-300/2022. Merupakan dokumentasi capaian kinerja riil pegawai yang menjadi dasar penilaian.' },
+{ q: 'Apa itu MPJHD?', a: 'MPJHD (Nilai Hukuman Disiplin) adalah bobot pengurang NKP akibat hukuman disiplin, dengan persentase: Ringan 10%, Sedang 25%, Berat 40% dari skor NKP.' },
+{ q: 'Kapan sidang TPK dilaksanakan?', a: 'Sidang TPK dilaksanakan secara triwulanan dan tahunan untuk menetapkan Nilai Koreksi, Nilai Dampak Pelanggaran Disiplin, dan Nilai Dampak Perilaku.' },
+{ q: 'Apa itu K3 dan bagaimana perannya?', a: 'K3 (Kontribusi Kinerja) adalah bobot kontribusi setiap IKI terhadap NHK. Reviu K3 oleh atasan & Pengelola Kinerja Organisasi harus tuntas hingga klik "Submit Reviu K3" agar bobot K3 terhitung dengan benar.' },
+{ q: 'Apa perbedaan JF substansi dan non-substansi?', a: 'JF substansi (seperti JF Keuangan) memiliki bobot NKO 50:50 dengan Hasil, sedangkan JF non-substansi memiliki bobot 30:70. Ini memengaruhi formula perhitungan NKP akhir.' },
+{ q: 'Apa fungsi aplikasi Nadine?', a: 'Nadine adalah aplikasi resmi untuk penetapan SKP dan SKEP NKP melalui TTE (Tanda Tangan Elektronik). Semua penetapan kinerja wajib melalui Nadine.' },
+{ q: 'Apa itu IKI mandatory?', a: 'IKI mandatory adalah Indikator Kinerja Individu yang wajib ada dan diturunkan langsung dari IKI atasan atau peta proses bisnis, tidak dapat dihapus atau diganti oleh pegawai.' },
+{ q: 'Bagaimana jika NKO belum diinput?', a: 'Aplikasi akan memunculkan pesan error jika NKO belum diinput dan ditetapkan. NKO wajib ada sebelum perhitungan NKP dapat dilakukan.' },
+{ q: 'Apa itu Dialog Kinerja?', a: 'Dialog Kinerja adalah komunikasi berkala antara atasan dan pegawai untuk membahas capaian, kendala, dan pengembangan. Merupakan bagian dari proses pemantauan kinerja periodik.' },
+{ q: 'Apa itu Perilaku Kunci (Anchor Behaviour)?', a: 'Perilaku Kunci adalah perilaku spesifik yang menjadi tolok ukur rating perilaku kerja. Setiap kategori rating mensyaratkan jumlah minimal perilaku kunci yang ditunjukkan.' },
+{ q: 'Apa manfaat dari manajemen kinerja baru ini?', a: 'Manfaat: (1) Kinerja lebih terukur dan disiplin; (2) Keadilan (fairness) melalui normalisasi NKP; (3) Penguatan integritas; (4) Tanggung jawab atasan dalam pembinaan; (5) Deteksi dini permasalahan kinerja.' },
+{ q: 'Bagaimana mitigasi jika ada permasalahan aplikasi?', a: 'Mitigasi dilakukan melalui HelpDesk aplikasi, koordinasi dengan Pengelola SDM, dan eskalasi ke Tim Teknis jika diperlukan. Dokumentasi manual dapat digunakan sebagai bukti sementara.' },
+{ q: 'Apa itu Nilai Dampak Perilaku?', a: 'Nilai Dampak Perilaku adalah penyesuaian NKP berdasarkan evaluasi perilaku kerja (360°), dapat bernilai positif (menambah) atau negatif (mengurangi) tergantung kualitas perilaku yang ditunjukkan.' },
+{ q: 'Apa itu Nilai Koreksi?', a: 'Nilai Koreksi adalah penyesuaian NKP yang ditetapkan oleh TPK berdasarkan pertimbangan kualitatif, seperti kontribusi khusus, kondisi tertentu, atau faktor kontekstual lainnya.' },
+{ q: 'Di mana saya bisa mendapatkan informasi resmi?', a: 'Informasi resmi dapat diakses melalui t.kemenkeu.go.id/kinerjakemenkeu2026, dokumen KMK-127/2026, serta panduan aplikasi Performa / Satu Kemenkeu.' }
+];
+
+const MK_QUIZ = [
+{ q: 'Apa formula NKP Awal menurut KMK-127/2026?', opts: ['NKP Awal = NHK + NPK', 'NKP Awal = (75% × NHK) + (25% × NPK)', 'NKP Awal = (50% × NHK) + (50% × NPK)', 'NKP Awal = NHK × NPK'], correct: 1, explain: 'Formula NKP Awal = (75% × NHK) + (25% × NPK), di mana NHK adalah Nilai Hasil Kerja dan NPK adalah Nilai Perilaku Kerja.' },
+{ q: 'Berapa bobot NKO untuk Pimpinan UPK dan 1 tingkat di bawahnya serta JF substansi?', opts: ['10:90 (Hasil:NKO)', '30:70 (Hasil:NKO)', '50:50 (Hasil:NKO)', '70:30 (Hasil:NKO)'], correct: 2, explain: 'Untuk Pimpinan UPK/1 tingkat di bawah & JF substansi, bobotnya adalah 50:50 antara Hasil Penghitungan dan NKO.' },
+{ q: 'Apa yang menggantikan HKT (Hari Kerja Terhitung) dalam KMK-127/2026?', opts: ['Portofolio Kinerja', 'SKP Digital', 'E-Kinerja', 'Logbook Harian'], correct: 0, explain: 'HKT dihapus dan digantikan oleh Portofolio Kinerja yang mendokumentasikan capaian kinerja riil pegawai.' },
+{ q: 'Berapa bobot hukuman disiplin berat terhadap NKP?', opts: ['10%', '25%', '40%', '50%'], correct: 2, explain: 'Hukuman disiplin berat memotong NKP sebesar 40% × skor MPJHD dan dikenakan selama 4 periode triwulanan.' },
+{ q: 'Berapa jumlah maksimal IKI untuk jenjang Administrator (sebagai Pimpinan UPK)?', opts: ['25 IKI', '20 IKI', '15 IKI', '10 IKI'], correct: 2, explain: 'Untuk jenjang Administrator & JF setara sebagai Pimpinan UPK, jumlah IKI maksimal adalah 15.' },
+{ q: 'Apa kepanjangan dari TPK dalam konteks manajemen kinerja?', opts: ['Tim Penilai Kinerja', 'Tim Pengembangan Karir', 'Tim Pengawas Kinerja', 'Tim Perencanaan Kerja'], correct: 0, explain: 'TPK adalah Tim Penilai Kinerja yang berwenang menetapkan Nilai Koreksi & Nilai Dampak melalui sidang TPK.' },
+{ q: 'Berapa batas kalibrasi maksimal NHK untuk umum (non-JPTM)?', opts: ['100', '115', '120', 'Tanpa batas'], correct: 1, explain: 'Batas kalibrasi maksimal NHK untuk umum (non-JPTM) adalah 115. Untuk MK, WMK, dan JPTM maksimal 120.' },
+{ q: 'Aplikasi apa yang digunakan untuk penetapan SKP dan SKEP NKP via TTE?', opts: ['CEISA', 'SIMPONI', 'Nadine', 'HRIS'], correct: 2, explain: 'Nadine adalah aplikasi resmi untuk penetapan SKP dan SKEP NKP melalui Tanda Tangan Elektronik (TTE).' },
+{ q: 'Berapa jumlah kategori rating perilaku kerja menurut KMK-127/2026?', opts: ['3 kategori', '5 kategori', '7 kategori', '10 kategori'], correct: 2, explain: 'Terdapat 7 kategori rating perilaku kerja: 3 tingkat Di Atas Ekspektasi, 2 tingkat Sesuai Ekspektasi, dan 2 tingkat Di Bawah Ekspektasi.' },
+{ q: 'Apa yang dimaksud dengan DEK-HEK?', opts: ['Dokumen Evaluasi Kinerja – Hasil Evaluasi Kinerja', 'Data Elektronik Kinerja – Harmonisasi Evaluasi Kerja', 'Dashboard Evaluasi Kinerja – Historis Evaluasi Kerja', 'Dokumen Elektronik Kepegawaian – Hasil Kerja'], correct: 0, explain: 'DEK-HEK (Dokumen Evaluasi Kinerja – Hasil Evaluasi Kinerja) adalah dokumen hasil evaluasi kinerja yang ditetapkan via Nadine dan tidak dapat diubah setelah ditetapkan.' }
+];
+
+
+/* ==========================================================
+HELPER
+========================================================== */
+function flattenMenu(items, path = []) {
+let result = [];
+items.forEach(item => {
+const currentPath = [...path, { id: item.id, title: item.title }];
+result.push({ ...item, path: currentPath, hasChildren: !!(item.children && item.children.length) });
+if (item.children) result = result.concat(flattenMenu(item.children, currentPath));
+});
+return result;
+}
+const ALL_ITEMS = flattenMenu(MENU_DATA);
+
+
+/* ==========================================================
+SIDEBAR
+========================================================== */
+function renderSidebar() {
+document.getElementById('sideNav').innerHTML =
+'<div class="nav-item active" onclick="goHome()"><span class="ico">🏠</span><span>Beranda</span></div>'
++ buildNavItems(MENU_DATA, 0);
+}
+
+function buildNavItems(items, level) {
+let html = '';
+items.forEach(item => {
+const hasKids = item.children && item.children.length;
+if (hasKids) {
+html += `<div class="nav-item" onclick="toggleNav(this,'sub-${item.id}')">
+<span class="ico">${item.icon}</span><span>${item.title}</span>
+<span class="arrow" id="arrow-${item.id}">▶</span>
+</div>
+<div class="sub-nav" id="sub-${item.id}">${buildNavItems(item.children, level + 1)}</div>`;
+} else {
+html += `<div class="nav-item" onclick="navigateTo('${item.id}')"><span class="ico">${item.icon}</span><span>${item.title}</span></div>`;
+}
+});
+return html;
+}
+
+function toggleNav(el, subId) {
+document.getElementById(subId).classList.toggle('open');
+const arrow = el.querySelector('.arrow');
+if (arrow) arrow.classList.toggle('open');
+}
+
+
+/* ==========================================================
+NAVIGATION
+========================================================== */
+let currentPage = 'home';
+
+function goHome() {
+currentPage = 'home';
+renderBreadcrumb([]);
+renderHome();
+closeSidebar();
+setActiveNav(null);
+}
+
+function navigateTo(id) {
+const item = ALL_ITEMS.find(i => i.id === id);
+if (!item) return;
+
+currentPage = id;
+renderBreadcrumb(item.path);
+
+if (item.id === 'kinerja') renderKinerjaHub(item);
+else if (item.id.startsWith('mk-')) renderMKSubsection(item);
+else if (item.hasChildren) renderCategoryPage(item);
+else renderArticlePage(item);
+
+closeSidebar();
+setActiveNav(id);
+window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function setActiveNav(id) {
+document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+if (!id) document.querySelector('.nav-item').classList.add('active');
+}
+
+
+/* ==========================================================
+BREADCRUMB
+========================================================== */
+function renderBreadcrumb(path) {
+const bc = document.getElementById('breadcrumb');
+if (!path || path.length === 0) {
+bc.innerHTML = '<span class="current">🏠 Beranda</span>';
+return;
+}
+let html = '<span onclick="goHome()">🏠 Beranda</span>';
+path.forEach((p, i) => {
+html += '<span class="sep">›</span>';
+if (i === path.length - 1) html += `<span class="current">${p.title}</span>`;
+else html += `<span onclick="navigateTo('${p.id}')">${p.title}</span>`;
+});
+bc.innerHTML = html;
+}
+
+
+/* ==========================================================
+AGENDA LIVE EMBED
+========================================================== */
+function buildAgendaLiveEmbed() {
+const isPlaceholder = SPREADSHEET_EMBED_URL.includes('YOUR_PUBLISHED_ID');
+let iframeContent = '';
+if (isPlaceholder) {
+iframeContent = `<div class="agenda-error">
+<strong>⚠️ Spreadsheet belum dikonfigurasi</strong>
+<p>Untuk menampilkan agenda live:</p>
+<ol style="text-align:left;max-width:500px;margin:14px auto;line-height:1.8">
+<li>Buka Google Spreadsheet Agenda</li>
+<li>Menu <strong>File → Share → Publish to web</strong></li>
+<li>Pilih tab/sheet → Format <strong>Web page</strong> → <strong>Publish</strong></li>
+<li>Copy URL → paste ke <code>SPREADSHEET_EMBED_URL</code></li>
+</ol></div>`;
+} else {
+iframeContent = `<div class="agenda-loading" id="agendaLoading">
+<div class="spinner"></div><div>Memuat agenda…</div>
+</div>
+<iframe src="${SPREADSHEET_EMBED_URL}" onload="document.getElementById('agendaLoading').classList.add('hidden')" title="Agenda" loading="lazy"></iframe>`;
+}
+return `<div class="agenda-live">
+<div class="agenda-live-head">
+<div class="al-icon">📅</div>
+<div class="al-info">
+<h4>Agenda Direktur dan Kasubdit</h4>
+<p>${isPlaceholder ? 'Menunggu konfigurasi spreadsheet' : 'Data live — otomatis terupdate'}</p>
+</div>
+<div class="agenda-live-actions">
+<button class="al-btn" onclick="refreshAgenda()">🔄 Refresh</button>
+<a class="al-btn al-btn-primary" href="${SPREADSHEET_DIRECT_URL}" target="_blank" rel="noopener">Buka di Tab Baru ↗</a>
+</div>
+</div>
+<div class="agenda-iframe-wrap">${iframeContent}</div>
+</div>`;
+}
+
+function refreshAgenda() {
+const iframe = document.querySelector('.agenda-iframe-wrap iframe');
+if (iframe) {
+const src = iframe.src;
+iframe.src = '';
+setTimeout(() => {
+iframe.src = src;
+const loader = document.getElementById('agendaLoading');
+if (loader) loader.classList.remove('hidden');
+}, 100);
+}
+}
+
+
+/* ==========================================================
+HOME PAGE
+- 2 section utama (Kepegawaian & Manajemen Kinerja)
+- Agenda live embed di bawahnya
+========================================================== */
+function renderHome() {
+const area = document.getElementById('contentArea');
+const kepegawaianData = MENU_DATA.find(m => m.id === 'kepegawaian');
+const kepegawaianCount = countLeaves(kepegawaianData);
+
+area.innerHTML = `
+<div class="hero-banner">
+<h2>Selamat Datang di TU-Pedia 📖</h2>
+<p>Buku panduan digital seputar layanan Kepegawaian dan Manajemen Kinerja di lingkungan Direktorat Penerimaan dan Perencanaan Strategis, Direktorat Jenderal Bea dan Cukai.</p>
+</div>
+
+<div class="section-label">Fitur Utama</div>
+<div class="main-grid">
+<div class="main-card" onclick="navigateTo('kepegawaian')">
+<div class="mc-icon">👥</div>
+<h3>Kepegawaian</h3>
+<p>Layanan seputar administrasi, pengembangan, tata naskah dinas, dan manajemen pegawai secara menyeluruh.</p>
+<div class="mc-meta">${kepegawaianCount} layanan tersedia</div>
+</div>
+<div class="main-card" onclick="navigateTo('kinerja')">
+<div class="mc-icon">📈</div>
+<h3>Manajemen Kinerja</h3>
+<p>Panduan interaktif KMK-127/2026: kalkulator NHK & NKP, FAQ, dan kuis pemahaman.</p>
+<div class="mc-meta">8 modul interaktif</div>
+</div>
+</div>
+
+<div class="section-label">Agenda Pimpinan (Live)</div>
+${buildAgendaLiveEmbed()}
+`;
+}
+
+function countLeaves(item) {
+if (!item.children) return 1;
+return item.children.reduce((sum, c) => sum + countLeaves(c), 0);
+}
+
+
+/* ==========================================================
+CATEGORY PAGE
+========================================================== */
+function renderCategoryPage(item) {
+let cards = '';
+item.children.forEach(child => {
+const subCount = child.children ? countLeaves(child) : 0;
+cards += `<div class="m-card" onclick="navigateTo('${child.id}')">
+<div class="mc-head">
+<div class="mc-ico">${child.icon}</div>
+<div class="mc-title">${child.title}</div>
+</div>
+<div class="mc-desc">${child.desc || ''}</div>
+<div class="mc-foot">
+<span>${child.hasChildren ? subCount + ' sub-layanan' : 'Lihat detail'}</span>
+<span>→</span>
+</div>
+</div>`;
+});
+document.getElementById('contentArea').innerHTML = `
+<h2 class="page-title">${item.icon} ${item.title}</h2>
+<p style="color:var(--text2);margin-bottom:20px;font-size:.92rem">${item.desc || ''}</p>
+<div class="cards-grid">${cards}</div>
+`;
+}
+
+
+/* ==========================================================
+ARTICLE PAGE (Kepegawaian - 4 accordion)
+========================================================== */
+function renderArticlePage(item) {
+document.getElementById('contentArea').innerHTML = `
+<div class="article-head">
+<h2>${item.icon} ${item.title}</h2>
+<p>${item.desc || ''}</p>
+</div>
+<div class="accordion"><div class="acc-header open" onclick="toggleAcc(this)">📝 Deskripsi Layanan<span class="acc-arrow">▼</span></div>
+<div class="acc-body open"><div class="ph">[Isi dengan deskripsi lengkap layanan <strong>${item.title}</strong>]</div></div></div>
+<div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">📋 Syarat & Prosedur<span class="acc-arrow">▼</span></div>
+<div class="acc-body"><div class="ph">[Isi dengan syarat dan prosedur layanan <strong>${item.title}</strong>]</div></div></div>
+<div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">🔗 Link Pendukung<span class="acc-arrow">▼</span></div>
+<div class="acc-body"><div class="ph">[Tambahkan link form, spreadsheet, atau dokumen pendukung]</div></div></div>
+<div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">❓ FAQ<span class="acc-arrow">▼</span></div>
+<div class="acc-body"><div class="ph">[Tambahkan FAQ seputar <strong>${item.title}</strong>]</div></div></div>
+`;
+}
+
+function toggleAcc(header) {
+header.classList.toggle('open');
+header.nextElementSibling.classList.toggle('open');
+}
+
+
+/* ==========================================================
+MANAJEMEN KINERJA - HUB
+========================================================== */
+function renderKinerjaHub(item) {
+const subs = item.children;
+let cards = '';
+subs.forEach(s => {
+cards += `<div class="m-card" onclick="navigateTo('${s.id}')">
+<div class="mc-head">
+<div class="mc-ico">${s.icon}</div>
+<div class="mc-title">${s.title}</div>
+</div>
+<div class="mc-desc">${s.desc || ''}</div>
+<div class="mc-foot"><span>Buka modul →</span></div>
+</div>`;
+});
+
+document.getElementById('contentArea').innerHTML = `
+<div class="mk-hero">
+<span class="tag">KMK-127/2026</span>
+<h2>📈 Manajemen Kinerja Pegawai</h2>
+<p>Panduan interaktif lengkap: formula NKP baru (75% NHK + 25% NPK → bobot NKO dinamis), 7 kategori rating perilaku, simulasi hukuman disiplin, sidang TPK, kalkulator, FAQ, dan kuis pemahaman.</p>
+</div>
+<div class="formula-box">
+<div class="formula-main">NKP Awal = (75% × NHK) + (25% × NPK)</div>
+<div class="formula-sub">NKP = (w₁ × Hasil) + (w₂ × NKO) &nbsp;|&nbsp; Bobot: 50:50 · 30:70 · 10:90</div>
+</div>
+<div class="section-label" style="margin-top:24px">Pilih Modul</div>
+<div class="cards-grid">${cards}</div>
+`;
+}
+
+
+/* ==========================================================
+MANAJEMEN KINERJA - SUBSECTION ROUTER
+========================================================== */
+function renderMKSubsection(item) {
+const subnav = buildMKSubnav(item.id);
+let content = '';
+switch (item.id) {
+case 'mk-ringkasan': content = renderMK_Ringkasan(); break;
+case 'mk-alur': content = renderMK_Akur(); break;
+case 'mk-skp-iki': content = renderMK_SKP_IKI(); break;
+case 'mk-kalkulator-nhk': content = renderMK_KalkNHK(); break;
+case 'mk-kalkulator-nkp': content = renderMK_KalkNKP(); break;
+case 'mk-perilaku': content = renderMK_Perilaku(); break;
+case 'mk-faq': content = renderMK_FAQ(); break;
+case 'mk-kuis': content = renderMK_Kuis(); break;
+}
+
+document.getElementById('contentArea').innerHTML = `
+<div class="mk-hero">
+<span class="tag">${item.icon} ${item.title}</span>
+<h2>${item.title}</h2>
+<p>${item.desc || ''}</p>
+</div>
+${subnav}
+${content}
+`;
+
+if (item.id === 'mk-kalkulator-nhk') initKalkNHK();
+if (item.id === 'mk-kalkulator-nkp') initKalkNKP();
+if (item.id === 'mk-faq') initFAQ();
+if (item.id === 'mk-kuis') initKuis();
+}
+
+function buildMKSubnav(activeId) {
+const parent = MENU_DATA.find(m => m.id === 'kinerja');
+const items = parent.children.map(s =>
+`<a class="${s.id === activeId ? 'active' : ''}" onclick="navigateTo('${s.id}')">${s.icon} ${s.title}</a>`
+).join('');
+return `<div class="mk-subnav">${items}</div>`;
+}
+
+
+/* ==========================================================
+MK - RINGKASAN
+========================================================== */
+function renderMK_Ringkasan() {
+return `
+<div class="mk-section">
+<h3>🎯 Urgensi Perubahan</h3>
+<p>Mengapa aturan manajemen kinerja berubah dari KMK-300/2022 menjadi KMK-127/2026:</p>
+<div class="info-box blue"><strong>📊 Pemantauan Berkala</strong>Kinerja organisasi & pegawai dipantau berkala sebagai deteksi dini permasalahan kinerja.</div>
+<div class="info-box green"><strong>📏 Disiplin & Terukur</strong>Peningkatan kualitas kinerja melalui perencanaan kinerja yang lebih disiplin dan terukur.</div>
+<div class="info-box purple"><strong>⚖️ Keadilan (Fairness)</strong>Menormalisasi NKP berdasarkan kinerja sesungguhnya — meningkatkan engagement pegawai.</div>
+<div class="info-box orange"><strong>🛡️ Penguatan Integritas</strong>Hukuman disiplin & pelanggaran perilaku berdampak langsung pada nilai kinerja.</div>
+<div class="info-box red"><strong>👔 Tanggung Jawab Atasan</strong>Bentuk tanggung jawab atasan dalam membina bawahannya melalui Nilai Dampak & Nilai Koreksi.</div>
+</div>
+<div class="mk-section">
+<h3>🔄 Sebelum vs Sesudah</h3>
+<div class="compare-grid">
+<div class="compare-card before">
+<h5>✕ SEBELUMNYA · KMK-300/2022</h5>
+<ul>
+<li>NKO belum menjadi komponen NKP</li>
+<li>Tidak ada Tim Penilai Kinerja (TPK) & sidang TPK</li>
+<li>IKI bagi JF belum diatur detail</li>
+<li>Hukuman disiplin tidak memengaruhi NKP</li>
+<li>HKT dihitung dalam NKP</li>
+</ul>
+</div>
+<div class="compare-card after">
+<h5>✓ SEKARANG · KMK-127/2026</h5>
+<ul>
+<li>NKO masuk formula NKP dengan bobot dinamis (50/30/10%)</li>
+<li>Struktur TPK berwenang menetapkan Nilai Koreksi & Dampak</li>
+<li>Penguatan IKI JF Keuangan + IKI mandatory</li>
+<li>Hukdis memengaruhi NKP (40/25/10% × MPJHD)</li>
+<li>HKT dihapus → Portofolio Kinerja</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="mk-section">
+
+`;
+}
+
+
+/* ==========================================================
+MK - ALUR
+========================================================== */
+function renderMK_Akur() {
+return `
+<div class="mk-section">
+<h3>🔄 4 Tahap Siklus Kinerja</h3>
+<p>Siklus manajemen kinerja terdiri dari 4 tahap utama yang saling berkesinambungan:</p>
+<div class="timeline">
+<div class="tl-step" data-step="1">
+<h4>Perencanaan Kinerja</h4>
+<div class="tl-sub">Awal Tahun · Penyusunan & Penetapan SKP</div>
+<div class="tl-content">
+<ol>
+<li><strong>Perbarui data pegawai pada HRIS</strong> — Pastikan validitas data pegawai sudah benar dan terbaru melalui Pengelola SDM.</li>
+<li><strong>Cascade IKI ke bawahan</strong> — Penurunan IKI dari RHK atasan ke bawahan melalui katalog.</li>
+<li><strong>Buat konsep SKP</strong> — Pilih SS, susun IKI, input target IKI beserta ekspektasi khusus pimpinan.</li>
+<li><strong>Reviu & approval atasan langsung</strong> — Atasan memeriksa konsep SKP bawahan.</li>
+<li><strong>Penetapan SKP via TTE (Nadine)</strong> — Penetapan melalui konsep atau TTE eksternal pada aplikasi Nadine.</li>
+</ol>
+</div>
+</div>
+<div class="tl-step" data-step="2">
+<h4>Pelaksanaan & Pemantauan</h4>
+<div class="tl-sub">Berjalan · Dialog Kinerja Berkala</div>
+<div class="tl-content">
+<ol>
+<li><strong>Input realisasi IKI dengan bukti dukung valid</strong></li>
+<li><strong>Dialog kinerja & IPR periodik</strong></li>
+<li><strong>Reviu K3 oleh atasan & Pengelola Kinerja Organisasi</strong></li>
+</ol>
+</div>
+</div>
+<div class="tl-step" data-step="3">
+<h4>Evaluasi Kinerja</h4>
+<div class="tl-sub">Triwulanan & Tahunan</div>
+<div class="tl-content">
+<ol>
+<li><strong>Input realisasi IKU & persetujuan NKO</strong></li>
+<li><strong>Penilaian Perilaku Kerja (360°)</strong></li>
+<li><strong>Sidang TPK Triwulanan & Tahunan</strong></li>
+<li><strong>Penetapan SKEP NKP & DEK-HEK</strong></li>
+</ol>
+</div>
+</div>
+<div class="tl-step" data-step="4">
+<h4>Pelaporan & Pemanfaatan</h4>
+<div class="tl-sub">Output Siklus Kinerja</div>
+<div class="tl-content">
+<ul>
+<li>Tunjangan / Insentif</li>
+<li>Pegawai Teladan</li>
+<li>SLKS</li>
+<li>Pemetaan Talent</li>
+<li>Pengembangan Kompetensi</li>
+<li>Kenaikan Pangkat</li>
+<li>Grading Pelaksana</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+`;
+}
+
+
+/* ==========================================================
+MK - SKP & IKI
+========================================================== */
+function renderMK_SKP_IKI() {
+return `
+<div class="mk-section">
+<h3>📋 Jumlah IKI per Jenjang Jabatan</h3>
+<div class="data-table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th rowspan="2">Pegawai</th>
+<th colspan="2" style="text-align:center">Pimpinan UPK</th>
+<th colspan="2" style="text-align:center">Non-Pimpinan UPK</th>
+</tr>
+<tr><th>Min</th><th>Maks</th><th>Min</th><th>Maks</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>PPT Madya</strong></td><td>Sesuai RHK</td><td>25</td><td>3</td><td>10</td></tr>
+<tr><td><strong>PPT Pratama & JF ke Pimpinan UPK-One</strong></td><td>Sesuai RHK</td><td>20</td><td>3</td><td>10</td></tr>
+<tr><td><strong>Administrator & JF setara</strong></td><td>Sesuai RHK</td><td>15</td><td>3</td><td>8</td></tr>
+<tr><td><strong>Pengawas & JF setara</strong></td><td>—</td><td>—</td><td>3</td><td>7</td></tr>
+<tr><td><strong>Pelaksana & JF setara</strong></td><td>—</td><td>—</td><td>3</td><td>6</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="mk-section">
+<h3>📝 Proses Penyusunan SKP</h3>
+<ol>
+<li>Pegawai memilih <strong>Sasaran Strategis (SS)</strong></li>
+<li>Menyusun <strong>IKI</strong> yang terukur dan selaras dengan RHK atasan</li>
+<li>Menginput <strong>target IKI</strong> beserta ekspektasi khusus pimpinan</li>
+<li>Atasan melakukan <strong>reviu & approval</strong></li>
+<li>Penetapan melalui <strong>TTE di aplikasi Nadine</strong></li>
+</ol>
+</div>
+`;
+}
+
+
+/* ==========================================================
+MK - KALKULATOR NHK
+========================================================== */
+function renderMK_KalkNHK() {
+return `
+<div class="mk-section">
+<h3>🧮 Formula NHK</h3>
+<div class="formula-box">
+<div class="formula-main">NHK = Σ (Nilai Kualitas Capaian IKI × Bobot Tertimbang)</div>
+<div class="formula-sub">
+Nilai Kualitas Capaian IKI = Indeks Capaian IKI (maks 120) × Nilai K3<br>
+Bobot Waktu = Jumlah Hari per IKI ÷ Σ Hari<br>
+Bobot Tertimbang = (K3 × Bobot Waktu) ÷ Σ(K3 × Bobot Waktu)
+</div>
+</div>
+</div>
+<div class="calc-wrap">
+<h4>📊 Input Data IKI</h4>
+<div class="data-table-wrap" style="margin-bottom:14px">
+<table class="data-table" id="nhkTable">
+<thead><tr><th>IKI</th><th>Indeks (maks 120)</th><th>K3</th><th>Hari</th><th>Aksi</th></tr></thead>
+<tbody id="nhkTableBody"></tbody>
+</table>
+</div>
+<div class="calc-actions">
+<button class="calc-btn calc-btn-primary" onclick="nhkAddRow()">+ Tambah IKI</button>
+<button class="calc-btn calc-btn-ghost" onclick="nhkLoadSample()">↺ Load Contoh</button>
+<button class="calc-btn calc-btn-danger" onclick="nhkReset()">🗑 Reset</button>
+<button class="calc-btn calc-btn-primary" onclick="nhkCalculate()">🧮 Hitung NHK</button>
+</div>
+<div id="nhkResult"></div>
+</div>
+<div class="mk-section">
+<h3>📏 Batas Kalibrasi</h3>
+<div class="info-box green"><strong>Maks 115</strong>Untuk umum (non-JPTM)</div>
+<div class="info-box blue"><strong>Maks 120</strong>Untuk MK, WMK, JPTM</div>
+</div>
+`;
+}
+
+let nhkRowCount = 0;
+function initKalkNHK() { nhkRowCount = 0; nhkLoadSample(); }
+function nhkAddRow(name = '', idx = '', k3 = '', hari = '') {
+nhkRowCount++;
+const id = nhkRowCount;
+const tbody = document.getElementById('nhkTableBody');
+const tr = document.createElement('tr');
+tr.id = 'nhk-row-' + id;
+tr.innerHTML = `
+<td><input type="text" value="${name}" placeholder="Nama IKI" style="width:100%;padding:6px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text)"></td>
+<td><input type="number" class="nhk-idx" value="${idx}" min="0" max="120" step="0.01" style="width:100%;padding:6px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text)"></td>
+<td><input type="number" class="nhk-k3" value="${k3}" min="0" step="0.01" style="width:100%;padding:6px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text)"></td>
+<td><input type="number" class="nhk-hari" value="${hari}" min="0" step="1" style="width:100%;padding:6px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text)"></td>
+<td><button class="calc-btn calc-btn-danger" onclick="nhkRemoveRow(${id})" style="padding:4px 10px;font-size:.78rem">✕</button></td>
+`;
+tbody.appendChild(tr);
+}
+function nhkRemoveRow(id) { document.getElementById('nhk-row-' + id)?.remove(); }
+function nhkLoadSample() {
+document.getElementById('nhkTableBody').innerHTML = '';
+nhkRowCount = 0;
+nhkAddRow('IKI 1', 110, 0.4, 30);
+nhkAddRow('IKI 2', 100, 0.3, 45);
+nhkAddRow('IKI 3', 95, 0.3, 25);
+}
+function nhkReset() {
+document.getElementById('nhkTableBody').innerHTML = '';
+document.getElementById('nhkResult').innerHTML = '';
+nhkRowCount = 0;
+}
+function nhkCalculate() {
+const rows = document.querySelectorAll('#nhkTableBody tr');
+if (rows.length === 0) {
+document.getElementById('nhkResult').innerHTML = '<div class="info-box red"><strong>⚠️ Error</strong>Tambahkan minimal 1 IKI terlebih dahulu.</div>';
+return;
+}
+let data = [], totalHari = 0;
+rows.forEach(r => {
+const idx = parseFloat(r.querySelector('.nhk-idx').value) || 0;
+const k3 = parseFloat(r.querySelector('.nhk-k3').value) || 0;
+const hari = parseFloat(r.querySelector('.nhk-hari').value) || 0;
+data.push({ idx, k3, hari });
+totalHari += hari;
+});
+if (totalHari === 0) {
+document.getElementById('nhkResult').innerHTML = '<div class="info-box red"><strong>⚠️ Error</strong>Total hari tidak boleh 0.</div>';
+return;
+}
+data.forEach(d => { d.bobotWaktu = d.hari / totalHari; });
+const sumK3BobotWaktu = data.reduce((s, d) => s + (d.k3 * d.bobotWaktu), 0);
+if (sumK3BobotWaktu === 0) {
+document.getElementById('nhkResult').innerHTML = '<div class="info-box red"><strong>⚠️ Error</strong>Σ(K3 × Bobot Waktu) tidak boleh 0.</div>';
+return;
+}
+data.forEach(d => {
+d.bobotTertimbang = (d.k3 * d.bobotWaktu) / sumK3BobotWaktu;
+d.kualitas = d.idx * d.k3;
+d.kontribusi = d.kualitas * d.bobotTertimbang;
+});
+const nhk = data.reduce((s, d) => s + d.kontribusi, 0);
+let tableHtml = `<table class="data-table" style="margin-top:14px"><thead><tr><th>IKI</th><th>Indeks</th><th>K3</th><th>Kualitas</th><th>Hari</th><th>Bobot Tertimbang</th><th>Kontribusi</th></tr></thead><tbody>`;
+data.forEach((d, i) => {
+const name = rows[i].querySelector('input[type=text]').value || `IKI ${i+1}`;
+tableHtml += `<tr><td>${name}</td><td>${d.idx.toFixed(2)}</td><td>${d.k3.toFixed(2)}</td><td>${d.kualitas.toFixed(2)}</td><td>${d.hari}</td><td>${d.bobotTertimbang.toFixed(4)}</td><td>${d.kontribusi.toFixed(2)}</td></tr>`;
+});
+tableHtml += '</tbody></table>';
+document.getElementById('nhkResult').innerHTML = `${tableHtml}<div class="calc-result" style="margin-top:16px"><div class="label">HASIL PENGHITUNGAN NHK</div><div class="value">${nhk.toFixed(2)}</div><div class="sub">Batas kalibrasi: maks 115 (umum) · maks 120 (MK/WMK/JPTM)</div></div>`;
+}
+
+
+/* ==========================================================
+MK - KALKULATOR NKP
+========================================================== */
+function renderMK_KalkNKP() {
+return `
+<div class="mk-section">
+<h3>📊 Formula Lengkap NKP</h3>
+<div class="info-box blue"><strong>Langkah 1: NKP Awal</strong>NKP Awal = (75% × NHK) + (25% × NPK)<br><em>Catatan: Untuk JPTM, MK, WMK, Staf Khusus, Tenaga Ahli — NHK & NPK awal bernilai maks 120, selain itu dikalibrasi ke maks 115.</em></div>
+<div class="info-box orange"><strong>Langkah 2: Hasil Penghitungan</strong>Hasil = NKP Awal + Nilai Koreksi − Nilai Hukdis ± Nilai Dampak</div>
+<div class="info-box green"><strong>Langkah 3: NKP Final</strong>NKP = (bobot × Hasil) + (bobot × NKO)</div>
+</div>
+<div class="calc-wrap">
+<h4>🔢 Input Nilai</h4>
+<div class="calc-form">
+<div class="calc-field">
+<label>Kategori Pegawai</label>
+<select id="nkpKategori" onchange="nkpUpdateSkema()">
+<option value="50">Pimpinan UPK / 1 tingkat di bawah + JF substansi → Bobot 50:50</option>
+<option value="30">≥2 tingkat di bawah Pimpinan UPK + JF non-substansi → Bobot 30:70</option>
+<option value="10">Semua kategori (bila Hasil < NKO) → Bobot 10:90</option>
+</select>
+</div>
+<div class="calc-row">
+    <div class="calc-field"><label>NKP Awal</label><input type="number" id="nkpAwal" step="0.01" value="0"></div>
+    <div class="calc-field"><label>NKO</label><input type="number" id="nkpNKO" step="0.01" value="0"></div>
+</div>
+<div class="calc-row">
+<div class="calc-field"><label>Nilai Koreksi</label><input type="number" id="nkpKoreksi" step="0.01" value="0"></div>
+<div class="calc-field"><label>Nilai Hukdis</label><input type="number" id="nkpHukdis" step="0.01" value="0"></div>
+<div class="calc-field"><label>Nilai Dampak (±)</label><input type="number" id="nkpDampak" step="0.01" value="0"></div>
+</div>
+<div class="calc-actions">
+<button class="calc-btn calc-btn-primary" onclick="nkpCalculate()">🧮 Hitung NKP</button>
+<button class="calc-btn calc-btn-ghost" onclick="nkpReset()">↺ Reset</button>
+</div>
+</div>
+<div id="nkpResult"></div>
+</div>
+`;
+}
+function initKalkNKP() { nkpUpdateSkema(); }
+function nkpUpdateSkema() {
+const kat = document.getElementById('nkpKategori').value;
+const info = document.getElementById('nkpResult');
+if (info && !info.dataset.calculated) {
+info.innerHTML = `<div class="info-box blue" style="margin-top:14px"><strong>Skema aktif: ${kat}:${100-kat}</strong>Bobot Hasil = ${kat}%, Bobot NKO = ${100-kat}%</div>`;
+}
+}
+function nkpReset() {
+['nkpAwal','nkpNKO','nkpKoreksi','nkpHukdis','nkpDampak'].forEach(id => document.getElementById(id).value = 0);
+document.getElementById('nkpKategori').value = '50';
+const r = document.getElementById('nkpResult');
+r.innerHTML = '';
+r.dataset.calculated = '';
+nkpUpdateSkema();
+}
+function nkpCalculate() {
+    const nkpAwal = parseFloat(document.getElementById('nkpAwal').value) || 0;
+    const nko = parseFloat(document.getElementById('nkpNKO').value) || 0;
+    const koreksi = parseFloat(document.getElementById('nkpKoreksi').value) || 0;
+    const hukdis = parseFloat(document.getElementById('nkpHukdis').value) || 0;
+    const dampak = parseFloat(document.getElementById('nkpDampak').value) || 0;
+    const kat = parseFloat(document.getElementById('nkpKategori').value);
+    const hasil = nkpAwal + koreksi - hukdis + dampak;
+let w1 = kat / 100, w2 = (100 - kat) / 100;
+let skemaLabel = `${kat}:${100-kat}`;
+if (hasil < nko && kat !== 10) {
+w1 = 0.10; w2 = 0.90;
+skemaLabel = '10:90 (auto, karena Hasil < NKO)';
+}
+const nkp = (w1 * hasil) + (w2 * nko);
+const r = document.getElementById('nkpResult');
+r.dataset.calculated = '1';
+r.innerHTML = `
+    <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">
+        <div class="calc-result secondary"><div class="label">NKP AWAL</div><div class="value" style="font-size:1.4rem">${nkpAwal.toFixed(2)}</div><div class="sub">Input langsung</div></div>
+        <div class="calc-result secondary"><div class="label">HASIL PENGHITUNGAN</div><div class="value" style="font-size:1.4rem">${hasil.toFixed(2)}</div><div class="sub">${nkpAwal.toFixed(2)} + ${koreksi} − ${hukdis} ± ${dampak}</div></div>
+    </div>
+    <div class="calc-result" style="margin-top:12px"><div class="label">NKP FINAL · Skema ${skemaLabel}</div><div class="value">${nkp.toFixed(2)}</div><div class="sub">(${w1*100}% × ${hasil.toFixed(2)}) + (${w2*100}% × ${nko})</div></div>
+`;
+}
+
+
+/* ==========================================================
+MK - PERILAKU
+========================================================== */
+function renderMK_Perilaku() {
+return `
+<div class="mk-section">
+<h3>⭐ Rating Perilaku Kerja (7 Kategori)</h3>
+<div class="rating-grid">
+<div class="rating-card high"><h5>🌟 Di Atas Ekspektasi (Tingkat 3)</h5><div class="range">>115 s.d. 120</div><ul><li>Minimal 6 perilaku kunci + teladan</li></ul></div>
+<div class="rating-card high"><h5>🌟 Di Atas Ekspektasi (Tingkat 2)</h5><div class="range">>105 s.d. 115</div><ul><li>Minimal 5 perilaku kunci</li></ul></div>
+<div class="rating-card high"><h5>🌟 Di Atas Ekspektasi (Tingkat 1)</h5><div class="range">>100 s.d. 105</div><ul><li>Minimal 4 perilaku kunci</li></ul></div>
+<div class="rating-card mid"><h5>✓ Sesuai Ekspektasi (Tingkat 2)</h5><div class="range">95 s.d. 100</div><ul><li>Minimal 3 perilaku kunci</li></ul></div>
+<div class="rating-card mid"><h5>✓ Sesuai Ekspektasi (Tingkat 1)</h5><div class="range">90 s.d. <95</div><ul><li>Minimal 2 perilaku kunci</li></ul></div>
+<div class="rating-card low"><h5>⚠️ Di Bawah Ekspektasi (Tingkat 1)</h5><div class="range">70 s.d. <90</div><ul><li>Minimal 1 perilaku kunci atau tidak ada</li></ul></div>
+<div class="rating-card low"><h5>⚠️ Di Bawah Ekspektasi (Tingkat 2)</h5><div class="range"><70</div><ul><li>Dijatuhi hukuman disiplin</li></ul></div>
+</div>
+</div>
+<div class="mk-section">
+<h3>⚖️ Simulasi Dampak Hukuman Disiplin</h3>
+<div class="data-table-wrap">
+<table class="data-table">
+<thead><tr><th>Jenis Hukdis</th><th>Bobot</th><th>Durasi</th></tr></thead>
+<tbody>
+<tr><td><strong>Hukdis Ringan</strong></td><td>10% × skor MPJHD</td><td>2 periode</td></tr>
+<tr><td><strong>Hukdis Sedang</strong></td><td>25% × skor MPJHD</td><td>3 periode</td></tr>
+<tr><td><strong>Hukdis Berat</strong></td><td>40% × skor MPJHD</td><td>4 periode</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+`;
+}
+
+
+/* ==========================================================
+MK - FAQ
+========================================================== */
+function renderMK_FAQ() {
+return `
+<div class="mk-section">
+<h3>❓ Pertanyaan yang Sering Diajukan</h3>
+<p>${MK_FAQ.length} pertanyaan seputar manajemen kinerja KMK-127/2026.</p>
+<input type="text" class="faq-search" id="faqSearch" placeholder="🔍 Cari pertanyaan…">
+<div id="faqList"></div>
+</div>
+`;
+}
+function initFAQ() {
+renderFAQList(MK_FAQ);
+document.getElementById('faqSearch').addEventListener('input', e => {
+const q = e.target.value.toLowerCase().trim();
+const filtered = q ? MK_FAQ.filter(f => f.q.toLowerCase().includes(q) || f.a.toLowerCase().includes(q)) : MK_FAQ;
+renderFAQList(filtered);
+});
+}
+function renderFAQList(list) {
+const container = document.getElementById('faqList');
+if (list.length === 0) {
+container.innerHTML = '<div class="faq-empty">Tidak ada pertanyaan yang cocok.</div>';
+return;
+}
+container.innerHTML = list.map(f => `
+<div class="faq-item" onclick="this.classList.toggle('open')">
+<div class="faq-q"><span>❓</span><span>${f.q}</span><span class="faq-arrow">▼</span></div>
+<div class="faq-a">${f.a}</div>
+</div>
+`).join('');
+}
+
+
+/* ==========================================================
+MK - KUIS
+========================================================== */
+let quizState = { current: 0, answers: [], submitted: false };
+function renderMK_Kuis() {
+return `
+<div class="mk-section">
+<h3>🎯 Uji Pemahaman Anda</h3>
+<p>10 soal pilihan ganda tentang KMK-127/2026.</p>
+<div id="quizContainer"></div>
+</div>
+`;
+}
+function initKuis() {
+quizState = { current: 0, answers: Array(MK_QUIZ.length).fill(null), submitted: false };
+renderQuizQuestion();
+}
+function renderQuizQuestion() {
+const c = document.getElementById('quizContainer');
+const i = quizState.current;
+const q = MK_QUIZ[i];
+const total = MK_QUIZ.length;
+const answered = quizState.answers.filter(a => a !== null).length;
+const userAnswer = quizState.answers[i];
+const optsHtml = q.opts.map((opt, idx) => {
+const letter = String.fromCharCode(65 + idx);
+let cls = 'quiz-opt';
+if (userAnswer !== null) {
+if (idx === q.correct) cls += ' correct';
+else if (idx === userAnswer && idx !== q.correct) cls += ' wrong';
+}
+const clickable = userAnswer === null ? `onclick="quizAnswer(${idx})"` : '';
+return `<div class="${cls}" ${clickable}><span class="opt-letter">${letter}</span><span>${opt}</span></div>`;
+}).join('');
+const feedbackHtml = userAnswer !== null ? `<div class="quiz-feedback show ${userAnswer === q.correct ? 'correct' : 'wrong'}"><strong>${userAnswer === q.correct ? '✓ Benar!' : '✗ Kurang tepat.'}</strong><br>${q.explain}</div>` : '';
+c.innerHTML = `
+<div class="quiz-progress"><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${(answered/total)*100}%"></div></div><div class="quiz-progress-text">${answered}/${total} dijawab</div></div>
+<div class="quiz-card">
+<div class="q-num">Soal ${i+1} dari ${total}</div>
+<div class="q-text">${q.q}</div>
+<div class="quiz-options">${optsHtml}</div>
+${feedbackHtml}
+</div>
+<div class="quiz-nav">
+<button class="calc-btn calc-btn-ghost" onclick="quizPrev()" ${i === 0 ? 'disabled style="opacity:.5"' : ''}>← Sebelumnya</button>
+${i < total - 1 ? `<button class="calc-btn calc-btn-primary" onclick="quizNext()">Selanjutnya →</button>` : `<button class="calc-btn calc-btn-primary" onclick="quizFinish()" ${answered < total ? 'disabled style="opacity:.5"' : ''}>🏁 Lihat Skor</button>`}
+</div>
+`;
+}
+function quizAnswer(idx) {
+if (quizState.answers[quizState.current] !== null) return;
+quizState.answers[quizState.current] = idx;
+renderQuizQuestion();
+}
+function quizNext() { if (quizState.current < MK_QUIZ.length - 1) { quizState.current++; renderQuizQuestion(); } }
+function quizPrev() { if (quizState.current > 0) { quizState.current--; renderQuizQuestion(); } }
+function quizFinish() {
+const correct = quizState.answers.reduce((sum, a, i) => sum + (a === MK_QUIZ[i].correct ? 1 : 0), 0);
+const total = MK_QUIZ.length;
+const pct = Math.round((correct / total) * 100);
+let msg = '';
+if (pct === 100) msg = '🏆 Sempurna! Anda menguasai materi KMK-127/2026.';
+else if (pct >= 80) msg = '🌟 Bagus! Pemahaman Anda sangat baik.';
+else if (pct >= 60) msg = '👍 Cukup baik. Pelajari kembali bagian yang belum dikuasai.';
+else msg = '📚 Perlu belajar lebih giat. Baca kembali modul Ringkasan & Alur.';
+document.getElementById('quizContainer').innerHTML = `
+<div class="quiz-score"><div class="score-label">SKOR ANDA</div><div class="score-num">${correct}/${total}</div><div class="score-label">${pct}% benar</div><div class="score-msg">${msg}</div></div>
+<div class="quiz-nav" style="justify-content:center">
+<button class="calc-btn calc-btn-primary" onclick="initKuis()">↺ Ulangi Kuis</button>
+<button class="calc-btn calc-btn-ghost" onclick="quizReview()">📖 Lihat Pembahasan</button>
+</div>
+<div id="quizReview" style="margin-top:20px"></div>
+`;
+}
+function quizReview() {
+const c = document.getElementById('quizReview');
+c.innerHTML = MK_QUIZ.map((q, i) => {
+const userA = quizState.answers[i];
+const isCorrect = userA === q.correct;
+const optsHtml = q.opts.map((opt, idx) => {
+const letter = String.fromCharCode(65 + idx);
+let cls = 'quiz-opt';
+if (idx === q.correct) cls += ' correct';
+else if (idx === userA && idx !== q.correct) cls += ' wrong';
+return `<div class="${cls}"><span class="opt-letter">${letter}</span><span>${opt}</span></div>`;
+}).join('');
+return `<div class="quiz-card" style="margin-bottom:14px"><div class="q-num">Soal ${i+1} · ${isCorrect ? '✓ Benar' : '✗ Salah'}</div><div class="q-text">${q.q}</div><div class="quiz-options">${optsHtml}</div><div class="quiz-feedback show ${isCorrect ? 'correct' : 'wrong'}"><strong>Pembahasan:</strong> ${q.explain}</div></div>`;
+}).join('');
+}
+
+
+/* ==========================================================
+SEARCH
+========================================================== */
+function onSearch(q) {
+const box = document.getElementById('searchResults');
+q = q.trim().toLowerCase();
+if (!q) { box.classList.remove('open'); return; }
+let hits = ALL_ITEMS.filter(i => i.title.toLowerCase().includes(q) || (i.desc && i.desc.toLowerCase().includes(q))).slice(0, 6);
+const faqHits = MK_FAQ.filter(f => f.q.toLowerCase().includes(q) || f.a.toLowerCase().includes(q)).slice(0, 3);
+if (!hits.length && !faqHits.length) {
+box.innerHTML = '<div class="sr-item"><b>Tidak ditemukan</b><small>Coba kata kunci lain</small></div>';
+} else {
+let html = hits.map(h => {
+const trail = h.path.map(p => p.title).join(' › ');
+return `<div class="sr-item" onclick="navigateTo('${h.id}');document.getElementById('searchResults').classList.remove('open');document.getElementById('searchInput').value='';"><b>${h.icon} ${h.title}</b><small>${trail}</small></div>`;
+}).join('');
+if (faqHits.length) {
+html += `<div class="sr-item" style="background:var(--bg);cursor:default"><b>❓ Dari FAQ:</b></div>`;
+html += faqHits.map(f => `<div class="sr-item" onclick="navigateTo('mk-faq');setTimeout(()=>{const s=document.getElementById('faqSearch');if(s){s.value='${f.q.substring(0,30).replace(/'/g,"\\'")}';s.dispatchEvent(new Event('input'));}},100);document.getElementById('searchResults').classList.remove('open');document.getElementById('searchInput').value='';"><b>❓ ${f.q.substring(0, 70)}${f.q.length > 70 ? '…' : ''}</b><small>Manajemen Kinerja › FAQ</small></div>`).join('');
+}
+box.innerHTML = html;
+}
+box.classList.add('open');
+}
+document.addEventListener('click', e => {
+if (!e.target.closest('.search-box')) document.getElementById('searchResults').classList.remove('open');
+});
+
+
+/* ==========================================================
+DARK MODE
+========================================================== */
+function toggleTheme() {
+const d = document.documentElement;
+const dark = d.getAttribute('data-theme') === 'dark';
+d.setAttribute('data-theme', dark ? '' : 'dark');
+document.getElementById('themeBtn').textContent = dark ? '🌙' : '☀️';
+localStorage.setItem('tu-theme', dark ? 'light' : 'dark');
+}
+function loadTheme() {
+if (localStorage.getItem('tu-theme') === 'dark') {
+document.documentElement.setAttribute('data-theme', 'dark');
+document.getElementById('themeBtn').textContent = '☀️';
+}
+}
+
+
+/* ==========================================================
+SIDEBAR MOBILE
+========================================================== */
+function toggleSidebar() {
+document.getElementById('sidebar').classList.toggle('open');
+document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+document.getElementById('sidebar').classList.remove('open');
+document.getElementById('overlay').classList.remove('open');
+}
+
+
+/* ==========================================================
+INIT
+========================================================== */
+loadTheme();
+renderSidebar();
+goHome();
+</script>
+</body>
+</html>
+</content>
+</writeToFile>
