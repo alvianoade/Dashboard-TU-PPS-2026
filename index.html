@@ -419,7 +419,7 @@ const MENU_DATA = [
 id: 'kepegawaian', title: 'Kepegawaian', icon: '👥', cat: 'kepegawaian',
 desc: 'Layanan seputar administrasi, pengembangan, dan manajemen pegawai.',
 children: [
-{ id: 'tata-naskah', title: 'Tata Naskah Dinas', icon: '📄', cat: 'kepegawaian', desc: 'Pengelolaan naskah dinas masuk dan keluar.' },
+{ id: 'tata-naskah', title: 'Tata Naskah Dinas', icon: '📄', cat: 'kepegawaian', desc: 'Panduan kerapian naskah dinas sesuai standar DJBC (Estetika Ber-Nadine).' },
 { id: 'cuti-presensi', title: 'Cuti & Presensi', icon: '📅', cat: 'kepegawaian', desc: 'Konfirmasi kehadiran, perjalanan dinas, dan pengajuan cuti.',
 children: [
 { id: 'konfirmasi-kehadiran', title: 'Konfirmasi Kehadiran', icon: '✅', cat: 'kepegawaian', desc: 'Presensi harian pegawai.' },
@@ -429,7 +429,6 @@ children: [
 { id: 'pendidikan', title: 'Pendidikan dan Pengembangan Pegawai', icon: '🎓', cat: 'kepegawaian', desc: 'Studi, diklat, beasiswa, dan pengembangan kompetensi.',
 children: [
 { id: 'laporan-perkembangan-studi', title: 'Laporan Perkembangan Studi', icon: '📚', cat: 'kepegawaian', desc: 'Pelaporan kemajuan studi pegawai.' },
-{ id: 'laporan-selesai-studi', title: 'Laporan Selesai Studi', icon: '🎓', cat: 'kepegawaian', desc: 'Pelaporan penyelesaian studi.' },
 { id: 'info-diklat-beasiswa', title: 'Informasi Diklat dan Beasiswa', icon: 'ℹ️', cat: 'kepegawaian', desc: 'Informasi peluang diklat dan beasiswa.' },
 { id: 'gelar-akademik', title: 'Pencantuman Gelar Akademik', icon: '🏅', cat: 'kepegawaian', desc: 'Prosedur pencantuman gelar akademik.' },
 { id: 'kenaikan-pangkat', title: 'Kenaikan Pangkat dan Grading', icon: '📈', cat: 'kepegawaian', desc: 'Proses kenaikan pangkat dan grading.' },
@@ -599,6 +598,7 @@ renderBreadcrumb(item.path);
 
 if (item.id === 'kinerja') renderKinerjaHub(item);
 else if (item.id.startsWith('mk-')) renderMKSubsection(item);
+else if (item.id === 'tata-naskah') renderTataNaskahDinas(item);
 else if (item.hasChildren) renderCategoryPage(item);
 else renderArticlePage(item);
 
@@ -753,7 +753,111 @@ document.getElementById('contentArea').innerHTML = `
 `;
 }
 
+/* ==========================================================
+   TATA NASKAH DINAS (Konten Khusus dari PDF)
+   ========================================================== */
+function renderTataNaskahDinas(item) {
+    document.getElementById('contentArea').innerHTML = `
+        <div class="article-head">
+            <h2>${item.icon} ${item.title}</h2>
+            <p>${item.desc || ''}</p>
+        </div>
 
+        <div class="mk-section">
+            <h3>📐 Estetika Ber-Nadine</h3>
+            <p>Panduan kerapian naskah dinas sesuai standar Direktorat Jenderal Bea dan Cukai.</p>
+            
+            <h4>1. Kerapian Kop Surat</h4>
+            <div class="info-box blue">
+                <strong>📌 Aturan</strong>
+                Pastikan kop surat rapi, tanpa ada kalimat yang terpotong.
+            </div>
+
+            <h4>2. Kerapian Paragraf</h4>
+            <div class="info-box green">
+                <strong>📌 Aturan</strong>
+                Pastikan paragraf sejajar dengan kepala ND, serta menjorok tidak terlalu jauh, maksimal 1 inch pada ruler.
+            </div>
+
+            <h4>3. Spasi Antar Paragraf</h4>
+            <div class="info-box orange">
+                <strong> Aturan</strong>
+                Pastikan terdapat jarak antar paragraf (diskresi agar pembaca naskah dinas mudah membaca dan memahami paragraf/point). Jangan terlalu jauh, <strong>jangan gunakan Enter</strong>, namun gunakan <strong>spacing after 6pt</strong>.
+            </div>
+
+            <h4>4. Spasi Antar Baris</h4>
+            <div class="info-box purple">
+                <strong>📌 Aturan</strong>
+                Pastikan antar baris di paragraf tidak terlalu mepet, selalu gunakan minimal <strong>line spacing 1,15</strong>. Gunakan <strong>line spacing 1,5</strong> jika ingin memenuhi halaman dengan paragraf.
+            </div>
+
+            <h4>5. Kerapian Kolom Tabel</h4>
+            <div class="info-box blue">
+                <strong>📌 Aturan</strong>
+                Pastikan terdapat penanda yang jelas antara judul dengan isian tabel, paling mudah dengan memberi warna <strong>abu-abu</strong> pada header.
+            </div>
+
+            <h4>6. Kerapian Kolom Penandatangan</h4>
+            <div class="info-box green">
+                <strong>📌 Aturan</strong>
+                Beri jarak antara nama jabatan dengan kalimat <em>"Ditandatangani secara elektronik..."</em> sebanyak <strong>6 enter</strong>.
+            </div>
+        </div>
+
+        <div class="mk-section">
+            <h3>⚠️ Kesalahan Umum yang Sering Terjadi</h3>
+            
+            <div class="info-box red">
+                <strong>❌ Kesalahan #1 — Penggunaan Kata Ganti</strong>
+                Tidak memperhatikan lawan bicara naskah dinas. Jika sesama eselon II atau instansi di bawahnya, <strong>tidak perlu</strong> menggunakan "kami" atau "atas perhatian Bapak". Hal tersebut digunakan untuk komunikasi dengan instansi <strong>di atas</strong> eselon II.
+            </div>
+
+            <div class="info-box red">
+                <strong>❌ Kesalahan #2 — Penutup Surat Seadanya</strong>
+                Hanya menuliskan "Demikian disampaikan." Walaupun hanya laporan rutin, mohon tambahkan adab. Bisa menggunakan: <em>"Demikian disampaikan, atas perhatian dan kerja samanya diucapkan terima kasih."</em> (Jika dengan pengguna jasa, jangan gunakan kalimat kerja sama).
+            </div>
+
+            <div class="info-box red">
+                <strong>❌ Kesalahan #3 — Penulisan "Kerjasama"</strong>
+                Bakunya adalah <strong>"Kerja sama"</strong> atau dalam kalimat <strong>"kerja samanya"</strong> (dipisah).
+            </div>
+
+            <div class="info-box red">
+                <strong>❌ Kesalahan #4 — Menuliskan Plh. pada Kop Surat</strong>
+                Jika ada kondisi Plh, maka hanya disematkan di samping jabatan pada <strong>kolom penandatangan</strong>. Tidak perlu menyematkan Plh pada jabatan di kop surat.
+            </div>
+
+            <div class="info-box red">
+                <strong>❌ Kesalahan #5 — Minta Cepat Dinaikkan</strong>
+                Jika naskah dinas belum rapi, mohon dirapikan sebelum dinaikkan ke masing-masing Kasi/Kasubdit.
+            </div>
+        </div>
+
+        <div class="mk-section">
+            <h3>📋 Checklist Sebelum Mengunggah ke Nadine</h3>
+            <div style="display:grid;gap:8px">
+                ${[
+                    'Kop surat rapi, tidak ada kalimat terpotong',
+                    'Paragraf sejajar dengan kepala ND, menjorok maksimal 1 inch',
+                    'Spacing after 6pt antar paragraf (bukan Enter)',
+                    'Line spacing minimal 1,15 (atau 1,5 jika perlu)',
+                    'Header tabel diberi warna abu-abu',
+                    'Jarak 6 enter antara jabatan dan "Ditandatangani secara..."',
+                    'Kata ganti sesuai dengan level lawan bicara',
+                    'Penutup surat sopan dan sesuai konteks',
+                    'Penulisan "kerja sama" (dipisah)',
+                    'Plh hanya di kolom penandatangan, bukan di kop surat'
+                ].map((item, i) => `
+                    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg);border-radius:8px;border:1px solid var(--border)">
+                        <span style="width:24px;height:24px;border-radius:50%;background:var(--brand-grad);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0">${i+1}</span>
+                        <span style="font-size:.9rem;color:var(--text)">${item}</span>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+    
 /* ==========================================================
 ARTICLE PAGE (Kepegawaian - 4 accordion)
 ========================================================== */
