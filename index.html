@@ -415,71 +415,119 @@ Sidebar hanya menampilkan: Kepegawaian & Manajemen Kinerja
 Agenda Direktur hanya muncul di dashboard (home)
 ========================================================== */
 const MENU_DATA = [
-{
-id: 'kepegawaian', title: 'Kepegawaian', icon: '👥', cat: 'kepegawaian',
-desc: 'Layanan seputar administrasi, pengembangan, dan manajemen pegawai.',
-children: [
-{ id: 'tata-naskah', title: 'Tata Naskah Dinas', icon: '📄', cat: 'kepegawaian', desc: 'Panduan kerapian naskah dinas sesuai standar DJBC (Estetika Ber-Nadine).' },
-{ id: 'cuti-presensi', title: 'Cuti & Presensi', icon: '📅', cat: 'kepegawaian', desc: 'Konfirmasi kehadiran, perjalanan dinas, dan pengajuan cuti.',
-children: [
-{ id: 'konfirmasi-kehadiran', title: 'Konfirmasi Kehadiran', icon: '✅', cat: 'kepegawaian', desc: 'Presensi harian pegawai.' },
-{ id: 'e-perjadin', title: 'e-Perjadin', icon: '✈️', cat: 'kepegawaian', desc: 'Pelaporan perjalanan dinas secara elektronik.' },
-{ id: 'cuti', title: 'Cuti', icon: '🏖️', cat: 'kepegawaian', desc: 'Pengajuan dan persetujuan cuti pegawai.' }
-] },
-{ id: 'pendidikan', title: 'Pengembangan Pegawai', icon: '🎓', cat: 'kepegawaian', desc: 'Studi, diklat, beasiswa, dan pengembangan kompetensi.',
-children: [
-{ id: 'laporan-perkembangan-studi', title: 'Laporan Studi', icon: '📚', cat: 'kepegawaian', desc: 'Kewajiban pelaporan studi berkala berdasarkan PMK 34/2024.' },
-{ id: 'info-diklat-beasiswa', title: 'Informasi Beasiswa', icon: '️🏆', cat: 'kepegawaian', desc: 'Panduan Tugas Belajar (Dibiayai & Mandiri) sesuai PMK 34/2024.' },
-{ id: 'gelar-akademik', title: 'Pencantuman Gelar Akademik', icon: '🏅', cat: 'kepegawaian', desc: 'Prosedur pencantuman gelar akademik.' },
-{ id: 'kenaikan-pangkat', title: 'Kenaikan Pangkat dan Grading', icon: '📈', cat: 'kepegawaian', desc: 'Proses kenaikan pangkat dan grading.' },
-{ id: 'learning-org', title: 'Jadwal PKP', icon: '🎯', cat: 'kepegawaian', desc: 'Program organisasi pembelajar.' }
-] },
-{ id: 'administrasi-kepegawaian', title: 'Administrasi Kepegawaian', icon: '📝', cat: 'kepegawaian', desc: 'Laporan kelahiran, perkawinan, dan penerbitan KARIS/KARSU.',
-children: [
-{ id: 'laporan-kelahiran', title: 'Laporan Kelahiran / Pertambahan Anak', icon: '👶', cat: 'kepegawaian', desc: 'Pelaporan kelahiran atau pertambahan anak.' },
-{ id: 'laporan-perkawinan', title: 'Laporan Perkawinan Pertama', icon: '💍', cat: 'kepegawaian', desc: 'Pelaporan perkawinan pertama pegawai & Penerbitan KARIS/KARSU' },
-] },
-{ id: 'bmn', title: 'Barang Milik Negara', icon: '🏢', cat: 'kepegawaian', desc: 'Pengadaan dan perbaikan Barang Milik Negara, termasuk seragam.',
-children: [
-{ id: 'seragam', title: 'Seragam', icon: '👥', cat: 'kepegawaian', desc: 'Data ukuran segaram pegawai PPS.' },
-{ id: 'sensus-bmn', title: 'Sensus BMN', icon: '✍️', cat: 'kepegawaian', desc: 'Sensus BMN di Dit. PPS.' },
-{ id: 'perbaikan-bmn', title: 'Perbaikan BMN', icon: '🛠️', cat: 'kepegawaian', desc: 'Perbaikan BMN di Dit. PPS.' },
-] },
-{ id: 'update-data', title: 'Update Data Pegawai', icon: '📊', cat: 'kepegawaian', desc: 'Pemutakhiran data pegawai di berbagai sistem.',
-children: [
-{ id: 'deklarasi-hris', title: 'Deklarasi Data Pegawai', icon: '📋', cat: 'kepegawaian', desc: 'Deklarasi dan verifikasi data di sistem HRIS-Satu Kemenkeu.' },
-{ id: 'data-terbaru', title: 'Data Pegawai Terbaru', icon: '🔄', cat: 'kepegawaian', desc: 'Pemutakhiran data pegawai terkini.' },
-{ id: 'profiling', title: 'Profiling Pegawai', icon: '👤', cat: 'kepegawaian', desc: 'Profil kompetensi dan karir pegawai.' }
-] },
-{ id: 'bahan-tayang', title: 'Bahan Tayang', icon: '📚', cat: 'kepegawaian', desc: 'Kumpulan bahan tayang.' },
-{ id: 'booking-ruangan', title: 'Booking Ruangan', icon: '👥', cat: 'kepegawaian', desc: 'Kumpulan bahan tayang.' },
-{ id: 'mutasi', title: 'Mutasi', icon: '🔄', cat: 'kepegawaian', desc: 'Pengelolaan mutasi pegawai.' },
-{ id: 'magang', title: 'Magang', icon: '💼', cat: 'kepegawaian', desc: 'Program magang dan internship.' },
-{ id: 'layanan-aplikasi', title: 'Layanan Aplikasi', icon: '💻', cat: 'kepegawaian', desc: 'Dukungan teknis aplikasi dan sistem.',
-children: [
-{ id: 'helpdesk', title: 'HelpDesk', icon: '🛠️', cat: 'kepegawaian', desc: 'Layanan bantuan teknis.' },
-{ id: 'e-sign', title: 'E-Sign', icon: '✍️', cat: 'kepegawaian', desc: 'Tanda tangan elektronik.' },
-{ id: 'ceisa-care', title: 'CEISA-Care', icon: '💬', cat: 'kepegawaian', desc: 'Layanan dukungan CEISA.' },
-{ id: 'user-ceisa', title: 'Penambahan User CEISA', icon: '👥', cat: 'kepegawaian', desc: 'Pengajuan penambahan pengguna CEISA.' }
-] },
-{ id: 'dokumentasi', title: 'Dokumentasi Kegiatan PPS', icon: '⭐', cat: 'kepegawaian', desc: 'Dokumentasi Kegiatan PPS 2026' }
-]
-},
-{
-id: 'kinerja', title: 'Manajemen Kinerja', icon: '📈', cat: 'kinerja',
-desc: 'Panduan interaktif KMK-127/2026 tentang manajemen kinerja pegawai.',
-children: [
-{ id: 'mk-ringkasan', title: 'Ringkasan Kebijakan', icon: '📖', cat: 'kinerja', desc: 'Urgensi perubahan dan perbandingan KMK-300/2022 vs KMK-127/2026.' },
-{ id: 'mk-alur', title: 'Alur Siklus Kinerja', icon: '🔄', cat: 'kinerja', desc: '4 tahap siklus: Perencanaan, Pelaksanaan, Evaluasi, Pelaporan.' },
-{ id: 'mk-skp-iki', title: 'SKP & Ketentuan IKI', icon: '📋', cat: 'kinerja', desc: 'Jumlah IKI per jenjang jabatan dan ketentuan penyusunan SKP.' },
-{ id: 'mk-kalkulator-nhk', title: 'Kalkulator NHK', icon: '🧮', cat: 'kinerja', desc: 'Hitung Nilai Hasil Kerja secara interaktif.' },
-{ id: 'mk-kalkulator-nkp', title: 'Kalkulator NKP', icon: '📊', cat: 'kinerja', desc: 'Hitung Nilai Kinerja Pegawai dengan formula lengkap.' },
-{ id: 'mk-perilaku', title: 'Perilaku Kerja & Disiplin', icon: '⭐', cat: 'kinerja', desc: '7 kategori rating perilaku dan simulasi dampak hukuman disiplin.' },
-{ id: 'mk-faq', title: 'FAQ', icon: '❓', cat: 'kinerja', desc: 'Pertanyaan yang sering diajukan seputar manajemen kinerja.' },
-{ id: 'mk-kuis', title: 'Kuis Interaktif', icon: '🎯', cat: 'kinerja', desc: 'Uji pemahaman Anda tentang KMK-127/2026.' },
-{ id: 'dokumen-kinerja', title: 'Dokumen Kinerja Pegawai', icon: '📈', cat: 'kepegawaian', desc: 'Pengelolaan dokumen kinerja pegawai.' }
-]
-}
+  {
+    id: 'organisasi', title: 'Organisasi & Keprotokolan', icon: '🏛️', cat: 'organisasi',
+    desc: 'Informasi organisasi, agenda, tata naskah dinas, bahan tayang, booking ruangan, dan peminjaman arsip.',
+    children: [
+      { id: 'profil', title: 'Profil', icon: '📋', cat: 'organisasi', desc: 'Sejarah, visi misi, tugas fungsi, struktur organisasi.' },
+      { id: 'tata-naskah-dinas', title: 'Tata Naskah Dinas', icon: '', cat: 'organisasi', desc: 'Ketentuan, jenis naskah dinas, tata penulisan, kamus EYD, FAQ.' },
+      { id: 'bahan-tayang', title: 'Bahan Tayang', icon: '', cat: 'organisasi', desc: 'Template PPT DJBC, template PPT Kemenkeu, video Mars BC, Kemenkeu, dan Sikap Dasar.' },
+      { id: 'booking-ruangan', title: 'Booking Ruangan', icon: '🗓️', cat: 'organisasi', desc: 'Pemesanan ruangan rapat dan fasilitas kantor.' },
+      { id: 'daftar-peminjaman-arsip', title: 'Daftar Peminjaman Arsip', icon: '📁', cat: 'organisasi', desc: 'Daftar dan status peminjaman arsip/dokumen.' }
+    ]
+  },
+  {
+    id: 'kepegawaian', title: 'Kepegawaian', icon: '👥', cat: 'kepegawaian',
+    desc: 'Informasi dan layanan terkait administrasi, pengembangan, dan kesejahteraan pegawai.',
+    children: [
+      { id: 'cuti-presensi', title: 'Cuti & Presensi', icon: '📅', cat: 'kepegawaian', desc: 'Ketentuan cuti, jam kerja, konfirmasi kehadiran, dan lembur.',
+        children: [
+          { id: 'ketentuan-cuti', title: 'Ketentuan Cuti', icon: '🏖️', cat: 'kepegawaian', desc: 'Jenis-jenis cuti, syarat, dan prosedur pengajuan.' },
+          { id: 'konfirmasi-kehadiran', title: 'Konfirmasi Kehadiran', icon: '✅', cat: 'kepegawaian', desc: 'Presensi harian pegawai.' },
+          { id: 'jam-kerja-lembur', title: 'Ketentuan Jam Kerja dan Lembur', icon: '⏰', cat: 'kepegawaian', desc: 'Jam kerja resmi dan ketentuan lembur.' }
+        ]
+      },
+      { id: 'pengembangan-pegawai', title: 'Pengembangan Pegawai', icon: '🎓', cat: 'kepegawaian', desc: 'Studi, beasiswa, tugas belajar, gelar akademik, kenaikan pangkat, PKP, diklat.',
+        children: [
+          { id: 'laporan-studi', title: 'Laporan Studi', icon: '', cat: 'kepegawaian', desc: 'Laporan perkembangan dan selesai studi (PMK 34/2024).' },
+          { id: 'beasiswa-tugas-belajar', title: 'Beasiswa & Tugas Belajar', icon: '🎒', cat: 'kepegawaian', desc: 'Informasi beasiswa dan pengelolaan tugas belajar (PMK 34/2024).' },
+          { id: 'gelar-akademik', title: 'Pencantuman Gelar Akademik', icon: '🏅', cat: 'kepegawaian', desc: 'Prosedur pencantuman gelar akademik.' },
+          { id: 'kenaikan-pangkat-grading', title: 'Kenaikan Pangkat dan Grading', icon: '', cat: 'kepegawaian', desc: 'Proses kenaikan pangkat dan grading.' },
+          { id: 'pkp', title: 'PKP', icon: '📊', cat: 'kepegawaian', desc: 'Penilaian Kinerja Pegawai.' },
+          { id: 'diklat-pelatihan', title: 'Diklat & Pelatihan', icon: '📖', cat: 'kepegawaian', desc: 'Program diklat dan pelatihan pegawai.' }
+        ]
+      },
+      { id: 'administrasi-kepegawaian', title: 'Administrasi Kepegawaian', icon: '📝', cat: 'kepegawaian', desc: 'Laporan perkawinan, kelahiran, perceraian, hukdis, mutasi, ALPHA/LHKPN, e-Perjadin.',
+        children: [
+          { id: 'laporan-perkawinan', title: 'Laporan Perkawinan Pertama', icon: '💍', cat: 'kepegawaian', desc: 'Pelaporan perkawinan pertama pegawai.' },
+          { id: 'laporan-kelahiran', title: 'Laporan Kelahiran/Pertambahan Anak', icon: '👶', cat: 'kepegawaian', desc: 'Pelaporan kelahiran atau pertambahan anak.' },
+          { id: 'laporan-perceraian', title: 'Laporan Perceraian', icon: '💔', cat: 'kepegawaian', desc: 'Pelaporan perceraian pegawai.' },
+          { id: 'hukuman-disiplin', title: 'Ketentuan Hukuman Disiplin', icon: '️', cat: 'kepegawaian', desc: 'Jenis dan ketentuan hukuman disiplin PNS.' },
+          { id: 'ketentuan-cuti-admin', title: 'Ketentuan Cuti', icon: '🏖️', cat: 'kepegawaian', desc: 'Regulasi dan prosedur cuti pegawai.' },
+          { id: 'mutasi', title: 'Mutasi', icon: '🔄', cat: 'kepegawaian', desc: 'Prosedur dan ketentuan mutasi pegawai.' },
+          { id: 'perubahan-rekening-tukin', title: 'Perubahan Rekening Tukin', icon: '💳', cat: 'kepegawaian', desc: 'Update rekening untuk pembayaran tunjangan kinerja.' },
+          { id: 'alpha-lhkpn-espt', title: 'ALPHA/LHKPN/e-SPT', icon: '📋', cat: 'kepegawaian', desc: 'Aplikasi Laporan Perpajakan dan Harta Kekayaan, LHKPN, e-SPT.' },
+          { id: 'e-perjadin', title: 'e-Perjadin', icon: '✈️', cat: 'kepegawaian', desc: 'Sistem pelaporan perjalanan dinas elektronik.' }
+        ]
+      },
+      { id: 'bmn', title: 'Barang Milik Negara', icon: '🏢', cat: 'kepegawaian', desc: 'Seragam, sensus BMN, perbaikan, sarpras ATK.',
+        children: [
+          { id: 'seragam-perlengkapan', title: 'Seragam dan Perlengkapan Dinas', icon: '👔', cat: 'kepegawaian', desc: 'Pengadaan dan distribusi seragam serta perlengkapan dinas.' },
+          { id: 'sensus-bmn', title: 'Sensus BMN', icon: '📦', cat: 'kepegawaian', desc: 'Pencatatan dan inventarisasi Barang Milik Negara.' },
+          { id: 'perbaikan-bmn', title: 'Perbaikan BMN', icon: '', cat: 'kepegawaian', desc: 'Prosedur perbaikan dan pemeliharaan BMN.' },
+          { id: 'sarpras-atk', title: 'Sarpras ATK', icon: '🖊️', cat: 'kepegawaian', desc: 'Permintaan alat tulis kantor dan sarana prasarana.' }
+        ]
+      },
+      { id: 'kesejahteraan', title: 'Kesejahteraan Pegawai', icon: '💚', cat: 'kepegawaian', desc: 'Layanan poliklinik dan dana sosial pegawai.',
+        children: [
+          { id: 'poliklinik', title: 'Layanan Poliklinik', icon: '🏥', cat: 'kepegawaian', desc: 'Fasilitas dan jadwal layanan poliklinik pegawai.' },
+          { id: 'dana-sosial', title: 'Dana Sosial Pegawai', icon: '', cat: 'kepegawaian', desc: 'Informasi dan pengajuan dana sosial pegawai.' }
+        ]
+      },
+      { id: 'update-data-pegawai', title: 'Update Data Pegawai', icon: '📊', cat: 'kepegawaian', desc: 'Deklarasi data, daftar pegawai terbaru, profiling.',
+        children: [
+          { id: 'deklarasi-data', title: 'Deklarasi Data', icon: '📋', cat: 'kepegawaian', desc: 'Deklarasi dan verifikasi data di HRIS.' },
+          { id: 'daftar-pegawai-terbaru', title: 'Daftar Pegawai Terbaru', icon: '🔄', cat: 'kepegawaian', desc: 'Pemutakhiran data pegawai terkini.' },
+          { id: 'profiling-pegawai', title: 'Profiling Pegawai', icon: '👤', cat: 'kepegawaian', desc: 'Profil kompetensi dan karir pegawai.' }
+        ]
+      },
+      { id: 'layanan-aplikasi', title: 'Layanan Aplikasi dan Sistem', icon: '💻', cat: 'kepegawaian', desc: 'SatuKemenkeu, CEHRIS, CEISA4.0, Helpdesk, E-Sign, Ceisacare.',
+        children: [
+          { id: 'satukemenkeu', title: 'SatuKemenkeu', icon: '🌐', cat: 'kepegawaian', desc: 'Portal terintegrasi Kementerian Keuangan.' },
+          { id: 'cehris', title: 'CEHRIS', icon: '', cat: 'kepegawaian', desc: 'Custom Electronic Human Resource Information System.' },
+          { id: 'ceisa4', title: 'CEISA4.0', icon: '📦', cat: 'kepegawaian', desc: 'Customs Exports Imports System Application 4.0.' },
+          { id: 'helpdesk', title: 'Helpdesk', icon: '🛠️', cat: 'kepegawaian', desc: 'Layanan bantuan teknis aplikasi.' },
+          { id: 'e-sign', title: 'E-Sign', icon: '✍️', cat: 'kepegawaian', desc: 'Tanda tangan elektronik tersertifikasi.' },
+          { id: 'ceisacare', title: 'Ceisacare', icon: '💬', cat: 'kepegawaian', desc: 'Layanan dukungan CEISA.' }
+        ]
+      },
+      { id: 'employee-advocacy', title: 'Employee Advocacy', icon: '❤️', cat: 'kepegawaian', desc: 'Program advokasi dan dukungan pegawai.' }
+    ]
+  },
+  {
+    id: 'kinerja', title: 'Manajemen Kinerja', icon: '📈', cat: 'kinerja',
+    desc: 'Panduan interaktif KMK-127/2026 tentang manajemen kinerja pegawai.',
+    children: [
+      { id: 'mk-ringkasan', title: 'Ringkasan Kebijakan', icon: '', cat: 'kinerja', desc: 'Urgensi perubahan dan perbandingan KMK-300/2022 vs KMK-127/2026.' },
+      { id: 'mk-alur', title: 'Alur Siklus Kinerja', icon: '🔄', cat: 'kinerja', desc: '4 tahap siklus: Perencanaan, Pelaksanaan, Evaluasi, Pelaporan.' },
+      { id: 'mk-skp-iki', title: 'SKP & Ketentuan IKI', icon: '', cat: 'kinerja', desc: 'Jumlah IKI per jenjang jabatan dan ketentuan penyusunan SKP.' },
+      { id: 'mk-kalkulator', title: 'Kalkulator NHK & NKP', icon: '🧮', cat: 'kinerja', desc: 'Hitung Nilai Hasil Kerja dan Nilai Kinerja Pegawai secara interaktif.' },
+      { id: 'mk-perilaku', title: 'Perilaku Kinerja & Disiplin', icon: '⭐', cat: 'kinerja', desc: '7 kategori rating perilaku dan simulasi dampak hukuman disiplin.' },
+      { id: 'mk-dokumen-kinerja', title: 'Dokumen Kinerja Pegawai', icon: '📂', cat: 'kinerja', desc: 'Pengelolaan DEK/HEK dan dokumen kinerja.' },
+      { id: 'mk-faq', title: 'FAQ', icon: '❓', cat: 'kinerja', desc: 'Pertanyaan yang sering diajukan seputar manajemen kinerja.' },
+      { id: 'mk-kuis', title: 'Kuis Interaktif', icon: '🎯', cat: 'kinerja', desc: 'Uji pemahaman Anda tentang KMK-127/2026.' }
+    ]
+  },
+  {
+    id: 'pustaka', title: 'Pustaka PPS', icon: '📚', cat: 'pustaka',
+    desc: 'Ruang berbagi pengetahuan, dokumentasi, survei, program magang, dan tools pendukung.',
+    children: [
+      { id: 'dokumentasi-kegiatan', title: 'Dokumentasi Kegiatan', icon: '📸', cat: 'pustaka', desc: 'Foto/video kegiatan, foto ID Card.' },
+      { id: 'karya-intelektual', title: 'Karya Intelektual', icon: '📕', cat: 'pustaka', desc: 'Buku Saku MR, Jejak PPS, LAKIN, Buku PRKC, dll.' },
+      { id: 'aneka-survey', title: 'Aneka Survey', icon: '📊', cat: 'pustaka', desc: 'Survei kepuasan, survei internal, dan lainnya.' },
+      { id: 'program-magang', title: 'Program Magang PPS', icon: '🎓', cat: 'pustaka', desc: 'Informasi PKL/Magang, panduan, program kerja, materi, dokumentasi.' },
+      { id: 'software-tools', title: 'Software & Tools', icon: '🛠️', cat: 'pustaka', desc: 'Installer, tools, template, font.' }
+    ]
+  },
+  {
+    id: 'kritik-saran', title: 'Kritik & Saran', icon: '💬', cat: 'kritik-saran',
+    desc: 'Kanal penyampaian masukan, pertanyaan, dan kendala terkait layanan TU.',
+    children: [
+      { id: 'sampaikan-ide', title: 'Sampaikan Ide', icon: '💡', cat: 'kritik-saran', desc: 'Sampaikan ide dan gagasan untuk perbaikan layanan.' },
+      { id: 'laporkan-kendala', title: 'Laporkan Kendala', icon: '️', cat: 'kritik-saran', desc: 'Laporkan kendala yang dihadapi dalam layanan TU.' },
+      { id: 'ajukan-pertanyaan', title: 'Ajukan Pertanyaan', icon: '❓', cat: 'kritik-saran', desc: 'Ajukan pertanyaan seputar layanan TU.' }
+    ]
+  }
 ];
 
 
@@ -595,23 +643,26 @@ setActiveNav(null);
 }
 
 function navigateTo(id) {
-const item = ALL_ITEMS.find(i => i.id === id);
-if (!item) return;
+    const item = ALL_ITEMS.find(i => i.id === id);
+    if (!item) return;
 
-currentPage = id;
-renderBreadcrumb(item.path);
+    currentPage = id;
+    renderBreadcrumb(item.path);
 
-if (item.id === 'kinerja') renderKinerjaHub(item);
-else if (item.id.startsWith('mk-')) renderMKSubsection(item);
-else if (item.id === 'tata-naskah') renderTataNaskahDinas(item);
-else if (item.id === 'laporan-perkembangan-studi') renderLaporanPerkembanganStudi(item); 
-else if (item.id === 'info-diklat-beasiswa') renderInfoDiklatBeasiswa(item);      
-else if (item.hasChildren) renderCategoryPage(item);
-else renderArticlePage(item);
+    // Routing khusus
+    if (item.id === 'kinerja') renderKinerjaHub(item);
+    else if (item.id.startsWith('mk-')) renderMKSubsection(item);
+    else if (item.id === 'tata-naskah-dinas') renderTataNaskahDinas(item);
+    else if (item.id === 'laporan-studi') renderLaporanStudi(item);
+    else if (item.id === 'beasiswa-tugas-belajar') renderBeasiswaTugasBelajar(item);
+    else if (item.id === 'layanan-aplikasi') renderLayananAplikasi(item);
+    else if (item.id === 'kritik-saran') renderKritikSaran(item);
+    else if (item.hasChildren) renderCategoryPage(item);
+    else renderArticlePage(item);
 
-closeSidebar();
-setActiveNav(id);
-window.scrollTo({ top: 0, behavior: 'smooth' });
+    closeSidebar();
+    setActiveNav(id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function setActiveNav(id) {
@@ -704,23 +755,41 @@ const kepegawaianCount = countLeaves(kepegawaianData);
 area.innerHTML = `
 <div class="hero-banner">
 <h2>Selamat Datang di TU-Pedia 📖</h2>
-<p>Buku panduan digital seputar layanan Kepegawaian dan Manajemen Kinerja di lingkungan Direktorat Penerimaan dan Perencanaan Strategis, Direktorat Jenderal Bea dan Cukai.</p>
+<p>Platform informasi dan layanan Tata Usaha Direktorat PPS yang menyediakan berbagai informasi, panduan, dokumen, dan layanan internal secara terintegrasi untuk mendukung kemudahan akses bagi seluruh pegawai Direktorat PPS.</p>
 </div>
 
 <div class="section-label">Fitur Utama</div>
 <div class="main-grid">
-<div class="main-card" onclick="navigateTo('kepegawaian')">
-<div class="mc-icon">👥</div>
-<h3>Kepegawaian</h3>
-<p>Layanan seputar administrasi, pengembangan, tata naskah dinas, dan manajemen pegawai secara menyeluruh.</p>
-<div class="mc-meta">${kepegawaianCount} layanan tersedia</div>
-</div>
-<div class="main-card" onclick="navigateTo('kinerja')">
-<div class="mc-icon">📈</div>
-<h3>Manajemen Kinerja</h3>
-<p>Panduan interaktif KMK-127/2026: kalkulator NHK & NKP, FAQ, dan kuis pemahaman.</p>
-<div class="mc-meta">8 modul interaktif</div>
-</div>
+    <div class="main-card" onclick="navigateTo('organisasi')">
+        <div class="mc-icon">️</div>
+        <h3>Organisasi & Keprotokolan</h3>
+        <p>Informasi organisasi, agenda, tata naskah dinas, bahan tayang, booking ruangan, dan peminjaman arsip.</p>
+        <div class="mc-meta">${countLeaves(MENU_DATA.find(m => m.id === 'organisasi'))} layanan</div>
+    </div>
+    <div class="main-card" onclick="navigateTo('kepegawaian')">
+        <div class="mc-icon">👥</div>
+        <h3>Kepegawaian</h3>
+        <p>Administrasi, pengembangan, kesejahteraan pegawai, BMN, update data, dan layanan aplikasi.</p>
+        <div class="mc-meta">${countLeaves(MENU_DATA.find(m => m.id === 'kepegawaian'))} layanan</div>
+    </div>
+    <div class="main-card" onclick="navigateTo('kinerja')">
+        <div class="mc-icon">📈</div>
+        <h3>Manajemen Kinerja</h3>
+        <p>Panduan interaktif KMK-127/2026: kalkulator NHK & NKP, FAQ, dan kuis pemahaman.</p>
+        <div class="mc-meta">${countLeaves(MENU_DATA.find(m => m.id === 'kinerja'))} modul</div>
+    </div>
+    <div class="main-card" onclick="navigateTo('pustaka')">
+        <div class="mc-icon">📚</div>
+        <h3>Pustaka PPS</h3>
+        <p>Dokumentasi kegiatan, karya intelektual, survei, program magang, dan software & tools.</p>
+        <div class="mc-meta">${countLeaves(MENU_DATA.find(m => m.id === 'pustaka'))} koleksi</div>
+    </div>
+    <div class="main-card" onclick="navigateTo('kritik-saran')">
+        <div class="mc-icon">💬</div>
+        <h3>Kritik & Saran</h3>
+        <p>Kanal penyampaian masukan, pertanyaan, dan kendala terkait layanan TU.</p>
+        <div class="mc-meta">${countLeaves(MENU_DATA.find(m => m.id === 'kritik-saran'))} kanal</div>
+    </div>
 </div>
 
 <div class="section-label">Agenda Pimpinan (Live)</div>
@@ -865,38 +934,25 @@ function renderTataNaskahDinas(item) {
     `;
 }
 
-    /* ==========================================================
-   LAPORAN PERKEMBANGAN STUDI (Berdasarkan PMK 34/2024)
+/* ==========================================================
+   LAPORAN STUDI (PMK 34/2024)
    ========================================================== */
-function renderLaporanPerkembanganStudi(item) {
+function renderLaporanStudi(item) {
     document.getElementById('contentArea').innerHTML = `
-        <div class="article-head">
-            <h2>${item.icon} ${item.title}</h2>
-            <p>${item.desc || ''}</p>
-        </div>
-
+        <div class="article-head"><h2>${item.icon} ${item.title}</h2><p>${item.desc || ''}</p></div>
         <div class="mk-section">
             <h3>📌 Dasar Hukum & Definisi</h3>
-            <div class="info-box blue">
-                <strong>📖 PMK Nomor 34 Tahun 2024</strong>
-                Laporan Perkembangan Studi adalah laporan yang disusun oleh PNS Tugas Belajar mengenai perkembangan studi pada setiap akhir periode pembelajaran melalui aplikasi otomasi perkantoran yang disediakan oleh Kementerian Keuangan.
-            </div>
-            <div class="info-box purple">
-                <strong>⚖️ Pasal 16 ayat (1) huruf f</strong>
-                Menyampaikan Laporan Perkembangan Studi merupakan <strong>kewajiban</strong> PNS Tugas Belajar (Dibiayai maupun Mandiri Diberhentikan) dan digunakan sebagai salah satu dasar penilaian kinerja.
-            </div>
+            <div class="info-box blue"><strong>📖 PMK Nomor 34 Tahun 2024</strong>Laporan Perkembangan Studi adalah laporan yang disusun oleh PNS Tugas Belajar mengenai perkembangan studi pada setiap akhir periode pembelajaran melalui aplikasi otomasi perkantoran.</div>
+            <div class="info-box purple"><strong>⚖️ Pasal 16 ayat (1) huruf f</strong>Menyampaikan Laporan Perkembangan Studi merupakan <strong>kewajiban</strong> PNS Tugas Belajar dan digunakan sebagai salah satu dasar penilaian kinerja.</div>
         </div>
-
         <div class="mk-section">
             <h3>📅 Kapan Harus Melapor?</h3>
-            <div class="info-box orange">
-                <strong>⏰ Periode Pelaporan</strong>
-                Dilaporkan pada <strong>setiap akhir periode pembelajaran</strong> (semester/term/periode akademik) selama menjalani Tugas Belajar.
-            </div>
-            <div class="info-box green">
-                <strong>📤 Cara Menyampaikan</strong>
-                Melalui <strong>aplikasi otomasi perkantoran (office automation)</strong> yang disediakan oleh Kementerian Keuangan, ditujukan kepada atasan langsung dan UPK (tembusan UPTB dan UPSDM).
-            </div>
+            <div class="info-box orange"><strong>⏰ Periode Pelaporan</strong>Dilaporkan pada <strong>setiap akhir periode pembelajaran</strong> (semester/term/periode akademik).</div>
+            <div class="info-box green"><strong>📤 Cara Menyampaikan</strong>Melalui <strong>aplikasi otomasi perkantoran</strong> yang disediakan oleh Kementerian Keuangan.</div>
+        </div>
+        <div class="mk-section">
+            <h3>⚠️ Konsekuensi Tidak Melapor</h3>
+            <div class="info-box red"><strong>❌ Sanksi & Pembatalan</strong>Tidak melaporkan perkembangan studi merupakan alasan <strong>pembatalan atau penghentian Tugas Belajar</strong>.</div>
         </div>
 
         <div class="mk-section">
@@ -916,22 +972,14 @@ function renderLaporanPerkembanganStudi(item) {
                 </table>
             </div>
         </div>
-
-        <div class="mk-section">
-            <h3>⚠️ Konsekuensi Tidak Melapor</h3>
-            <div class="info-box red">
-                <strong>❌ Sanksi & Pembatalan</strong>
-                Berdasarkan Pasal 19 & 20, tidak melaporkan perkembangan studi dan telah diberi peringatan tertulis merupakan alasan <strong>pembatalan atau penghentian Tugas Belajar.</strong>Selain itu, dapat dikenakan sanksi kepegawaian sesuai peraturan disiplin PNS.
-            </div>
-        </div>
     `;
 }
 
 
 /* ==========================================================
-   INFORMASI DIKLAT DAN BEASISWA (Berdasarkan PMK 34/2024)
+  BEASISWA & TUGAS BELAJAR (PMK 34/2024)
    ========================================================== */
-function renderInfoDiklatBeasiswa(item) {
+function renderBeasiswaTugasBelajar(item) {
     document.getElementById('contentArea').innerHTML = `
         <div class="article-head">
             <h2>${item.icon} ${item.title}</h2>
@@ -1042,6 +1090,48 @@ function renderInfoDiklatBeasiswa(item) {
 
     `;
 }
+
+/* ==========================================================
+   LAYANAN APLIKASI DAN SISTEM (Grid Layout)
+   ========================================================== */
+function renderLayananAplikasi(item) {
+    const apps = item.children || [];
+    document.getElementById('contentArea').innerHTML = `
+        <div class="article-head"><h2>${item.icon} ${item.title}</h2><p>${item.desc || ''}</p></div>
+        <div class="cards-grid">
+            ${apps.map(app => `<div class="m-card" onclick="navigateTo('${app.id}')">
+                <div class="mc-head"><div class="mc-ico">${app.icon}</div><div class="mc-title">${app.title}</div></div>
+                <div class="mc-desc">${app.desc || ''}</div>
+                <div class="mc-foot"><span>Buka →</span></div>
+            </div>`).join('')}
+        </div>
+        <div class="mk-section">
+            <h3>➕ Tambah Aplikasi Baru</h3>
+            <div class="ph">[Untuk menambahkan aplikasi baru, edit array <code>children</code> di <code>MENU_DATA</code> bagian <code>layanan-aplikasi</code>]</div>
+        </div>
+    `;
+}
+
+/* ==========================================================
+   KRITIK & SARAN (Grid Layout)
+   ========================================================== */
+function renderKritikSaran(item) {
+    const channels = item.children || [];
+    document.getElementById('contentArea').innerHTML = `
+        <div class="article-head"><h2>${item.icon} ${item.title}</h2><p>${item.desc || ''}</p></div>
+        <div class="cards-grid">
+            ${channels.map(ch => `<div class="m-card" onclick="navigateTo('${ch.id}')">
+                <div class="mc-head"><div class="mc-ico">${ch.icon}</div><div class="mc-title">${ch.title}</div></div>
+                <div class="mc-desc">${ch.desc || ''}</div>
+                <div class="mc-foot"><span>Buka →</span></div>
+            </div>`).join('')}
+        </div>
+        <div class="mk-section">
+            <h3>👨‍💻 Tim Pengembang TU-Pedia</h3>
+            <div class="info-box blue"><strong>Subbagian Tata Usaha - Direktorat PPS</strong><ul style="margin-top:8px;margin-left:20px"><li>Alviano Ade Irawan</li><li>[Nama Pengembang 2]</li><li>[Nama Pengembang 3]</li></ul></div>
+        </div>
+    `;
+}
     
 /* ==========================================================
 ARTICLE PAGE (Kepegawaian - 4 accordion)
@@ -1106,33 +1196,25 @@ document.getElementById('contentArea').innerHTML = `
 MANAJEMEN KINERJA - SUBSECTION ROUTER
 ========================================================== */
 function renderMKSubsection(item) {
-const subnav = buildMKSubnav(item.id);
-let content = '';
-switch (item.id) {
-case 'mk-ringkasan': content = renderMK_Ringkasan(); break;
-case 'mk-alur': content = renderMK_Akur(); break;
-case 'mk-skp-iki': content = renderMK_SKP_IKI(); break;
-case 'mk-kalkulator-nhk': content = renderMK_KalkNHK(); break;
-case 'mk-kalkulator-nkp': content = renderMK_KalkNKP(); break;
-case 'mk-perilaku': content = renderMK_Perilaku(); break;
-case 'mk-faq': content = renderMK_FAQ(); break;
-case 'mk-kuis': content = renderMK_Kuis(); break;
-}
-
-document.getElementById('contentArea').innerHTML = `
-<div class="mk-hero">
-<span class="tag">${item.icon} ${item.title}</span>
-<h2>${item.title}</h2>
-<p>${item.desc || ''}</p>
-</div>
-${subnav}
-${content}
-`;
-
-if (item.id === 'mk-kalkulator-nhk') initKalkNHK();
-if (item.id === 'mk-kalkulator-nkp') initKalkNKP();
-if (item.id === 'mk-faq') initFAQ();
-if (item.id === 'mk-kuis') initKuis();
+    const subnav = buildMKSubnav(item.id);
+    let content = '';
+    switch (item.id) {
+        case 'mk-ringkasan': content = renderMK_Ringkasan(); break;
+        case 'mk-alur': content = renderMK_Akur(); break;
+        case 'mk-skp-iki': content = renderMK_SKP_IKI(); break;
+        case 'mk-kalkulator': content = renderMK_Kalkulator(); break;
+        case 'mk-perilaku': content = renderMK_Perilaku(); break;
+        case 'mk-dokumen-kinerja': content = renderMK_DokumenKinerja(); break;
+        case 'mk-faq': content = renderMK_FAQ(); break;
+        case 'mk-kuis': content = renderMK_Kuis(); break;
+    }
+    document.getElementById('contentArea').innerHTML = `
+        <div class="mk-hero"><span class="tag">${item.icon} ${item.title}</span><h2>${item.title}</h2><p>${item.desc || ''}</p></div>
+        ${subnav}${content}
+    `;
+    if (item.id === 'mk-kalkulator') { initKalkNHK(); initKalkNKP(); }
+    if (item.id === 'mk-faq') initFAQ();
+    if (item.id === 'mk-kuis') initKuis();
 }
 
 function buildMKSubnav(activeId) {
@@ -1142,7 +1224,6 @@ const items = parent.children.map(s =>
 ).join('');
 return `<div class="mk-subnav">${items}</div>`;
 }
-
 
 /* ==========================================================
 MK - RINGKASAN
@@ -1486,6 +1567,64 @@ r.innerHTML = `
     </div>
     <div class="calc-result" style="margin-top:12px"><div class="label">NKP FINAL · Skema ${skemaLabel}</div><div class="value">${nkp.toFixed(2)}</div><div class="sub">(${w1*100}% × ${hasil.toFixed(2)}) + (${w2*100}% × ${nko})</div></div>
 `;
+}
+
+     function renderMK_Kalkulator() {
+    return `
+        <div class="mk-section">
+            <h3>🧮 Kalkulator NHK</h3>
+            <div class="formula-box"><div class="formula-main">NHK = Σ (Nilai Kualitas Capaian IKI × Bobot Tertimbang)</div><div class="formula-sub">Nilai Kualitas = Indeks Capaian (maks 120) × K3<br>Bobot Tertimbang = (K3 × Bobot Waktu) ÷ Σ(K3 × Bobot Waktu)</div></div>
+        </div>
+        <div class="calc-wrap">
+            <h4>📊 Input Data IKI</h4>
+            <div class="data-table-wrap" style="margin-bottom:14px"><table class="data-table" id="nhkTable"><thead><tr><th>IKI</th><th>Indeks (maks 120)</th><th>K3</th><th>Hari</th><th>Aksi</th></tr></thead><tbody id="nhkTableBody"></tbody></table></div>
+            <div class="calc-actions">
+                <button class="calc-btn calc-btn-primary" onclick="nhkAddRow()">+ Tambah IKI</button>
+                <button class="calc-btn calc-btn-ghost" onclick="nhkLoadSample()">↺ Load Contoh</button>
+                <button class="calc-btn calc-btn-danger" onclick="nhkReset()">🗑 Reset</button>
+                <button class="calc-btn calc-btn-primary" onclick="nhkCalculate()">🧮 Hitung NHK</button>
+            </div>
+            <div id="nhkResult"></div>
+        </div>
+        <div class="mk-section" style="margin-top:30px">
+            <h3>📊 Kalkulator NKP</h3>
+            <div class="info-box blue"><strong>Langkah 1:</strong> NKP Awal = (75% × NHK) + (25% × NPK)</div>
+            <div class="info-box orange"><strong>Langkah 2:</strong> Hasil = NKP Awal + Koreksi − Hukdis ± Dampak</div>
+            <div class="info-box green"><strong>Langkah 3:</strong> NKP = (bobot × Hasil) + (bobot × NKO)</div>
+        </div>
+        <div class="calc-wrap">
+            <h4> Input Nilai NKP</h4>
+            <div class="calc-form">
+                <div class="calc-field"><label>Kategori Pegawai</label><select id="nkpKategori" onchange="nkpUpdateSkema()"><option value="50">Pimpinan UPK / 1 tkth below + JF substansi → 50:50</option><option value="30">≥2 tkth below + JF non-substansi → 30:70</option><option value="10">Semua kategori (bila Hasil < NKO) → 10:90</option></select></div>
+                <div class="calc-row">
+                    <div class="calc-field"><label>NKP Awal</label><input type="number" id="nkpAwal" step="0.01" value="0"></div>
+                    <div class="calc-field"><label>NKO</label><input type="number" id="nkpNKO" step="0.01" value="0"></div>
+                </div>
+                <div class="calc-row">
+                    <div class="calc-field"><label>Nilai Koreksi</label><input type="number" id="nkpKoreksi" step="0.01" value="0"></div>
+                    <div class="calc-field"><label>Nilai Hukdis</label><input type="number" id="nkpHukdis" step="0.01" value="0"></div>
+                    <div class="calc-field"><label>Nilai Dampak (±)</label><input type="number" id="nkpDampak" step="0.01" value="0"></div>
+                </div>
+                <div class="calc-actions">
+                    <button class="calc-btn calc-btn-primary" onclick="nkpCalculate()">🧮 Hitung NKP</button>
+                    <button class="calc-btn calc-btn-ghost" onclick="nkpReset()">↺ Reset</button>
+                </div>
+            </div>
+            <div id="nkpResult"></div>
+        </div>
+    `;
+}
+
+    function renderMK_DokumenKinerja() {
+    return `
+        <div class="mk-section">
+            <h3> Dokumen Kinerja Pegawai</h3>
+            <p>Pengelolaan DEK (Dokumen Evaluasi Kinerja) dan HEK (Hasil Evaluasi Kinerja) sesuai KMK-127/2026.</p>
+            <div class="info-box blue"><strong> DEK-HEK</strong>Dokumen hasil evaluasi kinerja triwulanan dan tahunan yang ditetapkan via Nadine. Setelah ditetapkan, DEK-HEK <strong>tidak dapat diubah</strong>.</div>
+            <div class="info-box green"><strong>✅ Dokumen yang Dikelola</strong><ul style="margin-top:8px;margin-left:20px"><li>SKP (Sasaran Kinerja Pegawai)</li><li>DEK-HEK Triwulanan</li><li>DEK-HEK Tahunan</li><li>Portofolio Kinerja</li><li>Bukti dukung capaian IKI</li></ul></div>
+            <div class="info-box orange"><strong>⚠️ Penting</strong>Pastikan semua dokumen kinerja diupload dan diverifikasi sebelum batas waktu penetapan DEK-HEK.</div>
+        </div>
+    `;
 }
 
 
